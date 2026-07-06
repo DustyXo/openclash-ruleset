@@ -1,0 +1,731 @@
+# =========================================
+#              代理提供商
+# =========================================
+proxy-providers:
+  Sub-store:
+    type: http
+    interval: 3600
+    proxy: DIRECT
+    health-check:
+      enable: true
+      url: "https://g.cn/generate_204"
+      interval: 10
+    override:
+      skip-cert-verify: true
+      udp: true
+    path: ./proxy_provider/provider.yaml
+    filter: >-
+      ^(?!.*(群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author)).*$
+    url: "url"
+
+# =========================================
+#             策略组配置
+# =========================================
+proxy-groups:
+
+  # --- 地区节点组（url-test 自动选最优） ---
+  - name: 香港节点
+    type: url-test
+    include-all: true
+    filter: >-
+      ^(?=.*(?i)(港|🇭🇰|HK|Hong|HKG)).*$
+    tolerance: 20
+    interval: 120
+    url: https://cp.cloudflare.com/generate_204
+    icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Hong_Kong.png"
+
+  - name: 美国节点
+    type: url-test
+    include-all: true
+    filter: >-
+      ^(?=.*(?i)(美|🇺🇸|US|USA|SJC|JFK|LAX|ORD|ATL|DFW|SFO|MIA|SEA|IAD)).*$
+    tolerance: 20
+    interval: 120
+    url: https://cp.cloudflare.com/generate_204
+    icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/USA.png"
+
+  - name: 日本节点
+    type: url-test
+    include-all: true
+    filter: >-
+      ^(?=.*(?i)(日|🇯🇵|JP|Japan|NRT|HND|KIX|CTS|FUK)).*$
+    tolerance: 20
+    interval: 120
+    url: https://cp.cloudflare.com/generate_204
+    icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Japan.png"
+
+  - name: 新加坡节点
+    type: url-test
+    include-all: true
+    filter: >-
+      ^(?=.*(?i)(坡|🇸🇬|SG|Sing|SIN|XSP)).*$
+    tolerance: 20
+    interval: 120
+    url: https://cp.cloudflare.com/generate_204
+    icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Singapore.png"
+
+  - name: 台湾节点
+    type: url-test
+    include-all: true
+    filter: >-
+      ^(?=.*(?i)(台|🇼🇸|🇹🇼|TW|tai|TPE|TSA|KHH)).*$
+    tolerance: 20
+    interval: 120
+    url: https://cp.cloudflare.com/generate_204
+    icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Taiwan_Province.png"
+
+  # --- 自动选择（所有节点测速选最优） ---
+  - name: 自动选择
+    type: url-test
+    include-all: true
+    tolerance: 20
+    interval: 120
+    url: https://cp.cloudflare.com/generate_204
+    icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Flight.png"
+
+  # --- 自定义独立代理（手动切换） ---
+  - name: 自定义代理
+    type: select
+    proxies:
+      - 香港节点
+      - 美国节点
+      - 新加坡节点
+      - 日本节点
+      - 台湾节点
+      - 自动选择
+      - 全球直连
+    use:
+      - Sub-store
+    icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Network.png"
+
+  # --- 直连 ---
+  - name: 全球直连
+    type: url-test
+    proxies:
+      - DIRECT
+    tolerance: 100
+    url: https://cp.cloudflare.com/generate_204
+    icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/DIRECT.png"
+
+  # --- 手动选择（含所有节点） ---
+  - name: 手动选择
+    type: select
+    proxies:
+      - 香港节点
+      - 美国节点
+      - 日本节点
+      - 新加坡节点
+      - 台湾节点
+      - 自动选择
+      - 全球直连
+    use:
+      - Sub-store
+    icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/11111.png"
+
+  # --- 兜底 ---
+  - name: 漏网之鱼
+    type: select
+    proxies:
+      - 香港节点
+      - 美国节点
+      - 新加坡节点
+      - 日本节点
+      - 台湾节点
+      - 手动选择
+      - 自动选择
+      - 全球直连
+    use:
+      - Sub-store
+    icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/match.png"
+
+  # --- 服务策略组（精简合并后） ---
+  - name: 即时通讯
+    type: select
+    proxies:
+      - 香港节点
+      - 美国节点
+      - 新加坡节点
+      - 日本节点
+      - 台湾节点
+      - 手动选择
+      - 自动选择
+      - 全球直连
+    icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Telegram.png"
+
+  - name: 社交媒体
+    type: select
+    proxies:
+      - 香港节点
+      - 美国节点
+      - 新加坡节点
+      - 日本节点
+      - 台湾节点
+      - 手动选择
+      - 自动选择
+      - 全球直连
+    icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Twitter.png"
+
+  - name: GitHub
+    type: select
+    proxies:
+      - 香港节点
+      - 美国节点
+      - 新加坡节点
+      - 日本节点
+      - 台湾节点
+      - 手动选择
+      - 自动选择
+      - 全球直连
+    icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/GitHub.png"
+
+  - name: AI服务
+    type: select
+    proxies:
+      - 美国节点
+      - 香港节点
+      - 新加坡节点
+      - 日本节点
+      - 台湾节点
+      - 手动选择
+      - 自动选择
+      - 全球直连
+    icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/AI_bot.png"
+
+  - name: 谷歌服务
+    type: select
+    proxies:
+      - 香港节点
+      - 美国节点
+      - 新加坡节点
+      - 日本节点
+      - 台湾节点
+      - 手动选择
+      - 自动选择
+      - 全球直连
+    icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Google.png"
+
+  - name: 苹果服务
+    type: select
+    proxies:
+      - 香港节点
+      - 美国节点
+      - 新加坡节点
+      - 日本节点
+      - 台湾节点
+      - 手动选择
+      - 自动选择
+      - 全球直连
+    icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Apple_black.png"
+
+  - name: 微软服务
+    type: select
+    proxies:
+      - 香港节点
+      - 美国节点
+      - 新加坡节点
+      - 日本节点
+      - 台湾节点
+      - 手动选择
+      - 自动选择
+      - 全球直连
+    icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Microsoft.png"
+
+  - name: 国外流媒体
+    type: select
+    proxies:
+      - 新加坡节点
+      - 香港节点
+      - 美国节点
+      - 日本节点
+      - 台湾节点
+      - 手动选择
+      - 自动选择
+      - 全球直连
+    icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Network.png"
+
+  - name: TikTok
+    type: select
+    proxies:
+      - 美国节点
+      - 香港节点
+      - 新加坡节点
+      - 日本节点
+      - 台湾节点
+      - 手动选择
+      - 自动选择
+      - 全球直连
+    icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/TikTok.png"
+
+  - name: Bahamut
+    type: select
+    proxies:
+      - 台湾节点
+      - 香港节点
+      - 美国节点
+      - 新加坡节点
+      - 日本节点
+      - 手动选择
+      - 自动选择
+      - 全球直连
+    icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Bahamut_i.png"
+
+  - name: PayPal
+    type: select
+    proxies:
+      - 美国节点
+      - 香港节点
+      - 新加坡节点
+      - 日本节点
+      - 台湾节点
+      - 手动选择
+      - 自动选择
+      - 全球直连
+    icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/PayPal.png"
+
+  - name: 游戏平台
+    type: select
+    proxies:
+      - 香港节点
+      - 美国节点
+      - 新加坡节点
+      - 日本节点
+      - 台湾节点
+      - 手动选择
+      - 自动选择
+      - 全球直连
+    icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Game.png"
+
+  - name: 测速工具
+    type: select
+    proxies:
+      - 香港节点
+      - 美国节点
+      - 新加坡节点
+      - 日本节点
+      - 台湾节点
+      - 手动选择
+      - 自动选择
+      - 全球直连
+    icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/SpeedTest.png"
+
+  - name: Spotify
+    type: select
+    proxies:
+      - 新加坡节点
+      - 香港节点
+      - 美国节点
+      - 日本节点
+      - 台湾节点
+      - 手动选择
+      - 自动选择
+      - 全球直连
+    icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Spotify.png"
+
+# =========================================
+#            规则提供者
+# =========================================
+rule-providers:
+
+  private:
+    type: http
+    behavior: domain
+    format: mrs
+    interval: 86400
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.mrs"
+    path: ./rule_provider/private.mrs
+
+  private_ip:
+    type: http
+    behavior: ipcidr
+    format: mrs
+    interval: 86400
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/private.mrs"
+    path: ./rule_provider/private_ip.mrs
+
+  google-cn:
+    type: http
+    behavior: domain
+    format: mrs
+    interval: 86400
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google-cn.mrs"
+    path: ./rule_provider/google-cn.mrs
+
+  category-games@cn:
+    type: http
+    behavior: domain
+    format: mrs
+    interval: 86400
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-games@cn.mrs"
+    path: ./rule_provider/category-games@cn.mrs
+
+  category-game-platforms-download:
+    type: http
+    behavior: domain
+    format: mrs
+    interval: 86400
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-game-platforms-download.mrs"
+    path: ./rule_provider/category-game-platforms-download.mrs
+
+  category-public-tracker:
+    type: http
+    behavior: domain
+    format: mrs
+    interval: 86400
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-public-tracker.mrs"
+    path: ./rule_provider/category-public-tracker.mrs
+
+  dev:
+    type: http
+    behavior: domain
+    format: mrs
+    interval: 86400
+    url: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/rules/dev.mrs"
+    path: ./rule_provider/dev.mrs
+
+  custom_direct:
+    type: http
+    behavior: domain
+    format: mrs
+    interval: 86400
+    url: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/rules/custom_direct.mrs"
+    path: ./rule_provider/custom_direct.mrs
+
+  custom_proxy:
+    type: http
+    behavior: domain
+    format: mrs
+    interval: 86400
+    url: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/rules/custom_proxy.mrs"
+    path: ./rule_provider/custom_proxy.mrs
+
+  category-communication:
+    type: http
+    behavior: domain
+    format: mrs
+    interval: 86400
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-communication.mrs"
+    path: ./rule_provider/category-communication.mrs
+
+  category-social-media:
+    type: http
+    behavior: domain
+    format: mrs
+    interval: 86400
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-social-media-!cn.mrs"
+    path: ./rule_provider/category-social-media.mrs
+
+  openai:
+    type: http
+    behavior: domain
+    format: mrs
+    interval: 86400
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/openai.mrs"
+    path: ./rule_provider/openai.mrs
+
+  google-gemini:
+    type: http
+    behavior: domain
+    format: mrs
+    interval: 86400
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google-gemini.mrs"
+    path: ./rule_provider/google-gemini.mrs
+
+  category-ai:
+    type: http
+    behavior: domain
+    format: mrs
+    interval: 86400
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-ai-!cn.mrs"
+    path: ./rule_provider/category-ai.mrs
+
+  github:
+    type: http
+    behavior: domain
+    format: mrs
+    interval: 86400
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/github.mrs"
+    path: ./rule_provider/github.mrs
+
+  category-speedtest:
+    type: http
+    behavior: domain
+    format: mrs
+    interval: 86400
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-speedtest.mrs"
+    path: ./rule_provider/category-speedtest.mrs
+
+  steam:
+    type: http
+    behavior: domain
+    format: mrs
+    interval: 86400
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/steam.mrs"
+    path: ./rule_provider/steam.mrs
+
+  youtube:
+    type: http
+    behavior: domain
+    format: mrs
+    interval: 86400
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/youtube.mrs"
+    path: ./rule_provider/youtube.mrs
+
+  netflix:
+    type: http
+    behavior: domain
+    format: mrs
+    interval: 86400
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/netflix.mrs"
+    path: ./rule_provider/netflix.mrs
+
+  disney:
+    type: http
+    behavior: domain
+    format: mrs
+    interval: 86400
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/disney.mrs"
+    path: ./rule_provider/disney.mrs
+
+  hbo:
+    type: http
+    behavior: domain
+    format: mrs
+    interval: 86400
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/hbo.mrs"
+    path: ./rule_provider/hbo.mrs
+
+  primevideo:
+    type: http
+    behavior: domain
+    format: mrs
+    interval: 86400
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/primevideo.mrs"
+    path: ./rule_provider/primevideo.mrs
+
+  apple-tvplus:
+    type: http
+    behavior: domain
+    format: mrs
+    interval: 86400
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple-tvplus.mrs"
+    path: ./rule_provider/apple-tvplus.mrs
+
+  spotify:
+    type: http
+    behavior: domain
+    format: mrs
+    interval: 86400
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/spotify.mrs"
+    path: ./rule_provider/spotify.mrs
+
+  category-emby:
+    type: http
+    behavior: domain
+    format: mrs
+    interval: 86400
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-emby.mrs"
+    path: ./rule_provider/category-emby.mrs
+
+  PayPal:
+    type: http
+    behavior: domain
+    format: mrs
+    interval: 86400
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/paypal.mrs"
+    path: ./rule_provider/PayPal.mrs
+
+  apple:
+    type: http
+    behavior: domain
+    format: mrs
+    interval: 86400
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple.mrs"
+    path: ./rule_provider/apple.mrs
+
+  microsoft:
+    type: http
+    behavior: domain
+    format: mrs
+    interval: 86400
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/microsoft.mrs"
+    path: ./rule_provider/microsoft.mrs
+
+  bahamut:
+    type: http
+    behavior: domain
+    format: mrs
+    interval: 86400
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/bahamut.mrs"
+    path: ./rule_provider/bahamut.mrs
+
+  google:
+    type: http
+    behavior: domain
+    format: mrs
+    interval: 86400
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google.mrs"
+    path: ./rule_provider/google.mrs
+
+  tiktok:
+    type: http
+    behavior: domain
+    format: mrs
+    interval: 86400
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/tiktok.mrs"
+    path: ./rule_provider/tiktok.mrs
+
+  category-games:
+    type: http
+    behavior: domain
+    format: mrs
+    interval: 86400
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-games.mrs"
+    path: ./rule_provider/category-games.mrs
+
+  category-entertainment:
+    type: http
+    behavior: domain
+    format: mrs
+    interval: 86400
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-entertainment.mrs"
+    path: ./rule_provider/category-entertainment.mrs
+
+  gfw:
+    type: http
+    behavior: domain
+    format: mrs
+    interval: 86400
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/gfw.mrs"
+    path: ./rule_provider/gfw.mrs
+
+  telegram:
+    type: http
+    behavior: ipcidr
+    format: mrs
+    interval: 86400
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/telegram.mrs"
+    path: ./rule_provider/telegram.mrs
+
+  twitter:
+    type: http
+    behavior: ipcidr
+    format: mrs
+    interval: 86400
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/twitter.mrs"
+    path: ./rule_provider/twitter.mrs
+
+  facebook:
+    type: http
+    behavior: ipcidr
+    format: mrs
+    interval: 86400
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/facebook.mrs"
+    path: ./rule_provider/facebook.mrs
+
+  google-ip:
+    type: http
+    behavior: ipcidr
+    format: mrs
+    interval: 86400
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.mrs"
+    path: ./rule_provider/google-ip.mrs
+
+  netflix-ip:
+    type: http
+    behavior: ipcidr
+    format: mrs
+    interval: 86400
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/netflix.mrs"
+    path: ./rule_provider/netflix-ip.mrs
+
+  cn:
+    type: http
+    behavior: domain
+    format: mrs
+    interval: 86400
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs"
+    path: ./rule_provider/cn.mrs
+
+  cn-ip:
+    type: http
+    behavior: ipcidr
+    format: mrs
+    interval: 86400
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.mrs"
+    path: ./rule_provider/cn-ip.mrs
+
+# =========================================
+#                 规则配置
+# =========================================
+rules:
+  # --- 私有/内网 → 直连 ---
+  - RULE-SET,private,全球直连
+  - RULE-SET,private_ip,全球直连,no-resolve
+
+  # --- 自定义直连 ---
+  - RULE-SET,custom_direct,全球直连
+
+  # --- 自定义代理 ---
+  - RULE-SET,custom_proxy,自定义代理
+
+  # --- 国内服务 → 直连 ---
+  - RULE-SET,google-cn,全球直连
+  - RULE-SET,category-games@cn,全球直连
+  - RULE-SET,category-game-platforms-download,全球直连
+  - RULE-SET,category-public-tracker,全球直连
+
+  # --- 通讯 → 即时通讯 ---
+  - RULE-SET,category-communication,即时通讯
+  - RULE-SET,telegram,即时通讯,no-resolve
+
+  # --- 社交 → 社交媒体 ---
+  - RULE-SET,category-social-media,社交媒体
+  - RULE-SET,twitter,社交媒体,no-resolve
+  - RULE-SET,facebook,社交媒体,no-resolve
+
+  # --- AI → AI服务 ---
+  - RULE-SET,openai,AI服务
+  - RULE-SET,google-gemini,AI服务
+  - RULE-SET,category-ai,AI服务
+
+  # --- 开发 → GitHub ---
+  - RULE-SET,github,GitHub
+
+  # --- 测速 → 测速工具 ---
+  - RULE-SET,category-speedtest,测速工具
+
+  # --- 流媒体 → 国外流媒体 ---
+  - RULE-SET,youtube,国外流媒体
+  - RULE-SET,netflix,国外流媒体
+  - RULE-SET,netflix-ip,国外流媒体,no-resolve
+  - RULE-SET,disney,国外流媒体
+  - RULE-SET,hbo,国外流媒体
+  - RULE-SET,primevideo,国外流媒体
+  - RULE-SET,apple-tvplus,国外流媒体
+  - RULE-SET,category-emby,国外流媒体
+  - RULE-SET,spotify,国外流媒体
+  - RULE-SET,category-entertainment,国外流媒体
+
+  # --- 其他服务 ---
+  - RULE-SET,steam,游戏平台
+  - RULE-SET,category-games,游戏平台
+  - RULE-SET,PayPal,PayPal
+  - RULE-SET,apple,苹果服务
+  - RULE-SET,microsoft,微软服务
+  - RULE-SET,google,谷歌服务
+  - RULE-SET,google-ip,谷歌服务,no-resolve
+  - RULE-SET,tiktok,TikTok
+  - RULE-SET,bahamut,Bahamut
+
+  # --- GFW → 手动选择 ---
+  - RULE-SET,gfw,手动选择
+
+  # --- 开发者常用域名 → GitHub ---
+  - RULE-SET,dev,GitHub
+
+  # --- 国内 → 直连 ---
+  - RULE-SET,cn,全球直连
+  - RULE-SET,cn-ip,全球直连,no-resolve
+
+  # --- 兜底（未匹配的流量走漏网之鱼） ---
+  - MATCH,漏网之鱼
