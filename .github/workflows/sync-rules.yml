@@ -1,0 +1,189 @@
+name: Sync & Merge Rules from MetaCubeX
+
+on:
+  schedule:
+    - cron: '0 4 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync-and-merge:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Download and merge rule lists
+        run: |
+          set -e
+          META_BASE="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta"
+
+          # 辅助函数：合并 domain 文件（不含 / 的条目），确保末尾换行
+          merge_domain() {
+            local out="$1"; shift
+            {
+              for f in "$@"; do
+                if [ -f "$f" ]; then
+                  grep -v '/' "$f"
+                  tail -c1 "$f" | od -An -tx1 | grep -q '0a' || echo ""
+                fi
+              done
+            } | sort -u | grep -v '^$' > "$out"
+          }
+
+          # 辅助函数：合并 IP 文件（含 / 的条目），确保末尾换行
+          merge_ip() {
+            local out="$1"; shift
+            {
+              for f in "$@"; do
+                if [ -f "$f" ]; then
+                  grep '/' "$f"
+                  tail -c1 "$f" | od -An -tx1 | grep -q '0a' || echo ""
+                fi
+              done
+            } | sort -u | grep -v '^$' > "$out"
+          }
+
+          echo "=== Downloading and merging rule lists ==="
+
+          # 1. 即时通讯
+          #    domain: category-communication
+          #    ip: telegram
+          curl -sL "${META_BASE}/geo/geosite/category-communication.list" -o /tmp/im_domain.list
+          curl -sL "${META_BASE}/geo/geoip/telegram.list" -o /tmp/im_ip.list
+          merge_domain rules/instant-messaging.domain.list /tmp/im_domain.list
+          merge_ip rules/instant-messaging.ip.list /tmp/im_ip.list
+          echo "instant-messaging domain: $(wc -l < rules/instant-messaging.domain.list)  ip: $(wc -l < rules/instant-messaging.ip.list)"
+
+          # 2. 社交媒体
+          #    domain: category-social-media-!cn
+          #    ip: twitter + facebook
+          curl -sL "${META_BASE}/geo/geosite/category-social-media-!cn.list" -o /tmp/sm_domain.list
+          curl -sL "${META_BASE}/geo/geoip/twitter.list" -o /tmp/sm_tw.list
+          curl -sL "${META_BASE}/geo/geoip/facebook.list" -o /tmp/sm_fb.list
+          merge_domain rules/social-media.domain.list /tmp/sm_domain.list
+          merge_ip rules/social-media.ip.list /tmp/sm_tw.list /tmp/sm_fb.list
+          echo "social-media domain: $(wc -l < rules/social-media.domain.list)  ip: $(wc -l < rules/social-media.ip.list)"
+
+          # 3. AI服务（只有 domain）
+          curl -sL "${META_BASE}/geo/geosite/openai.list" -o /tmp/ai1.list
+          curl -sL "${META_BASE}/geo/geosite/google-gemini.list" -o /tmp/ai2.list
+          curl -sL "${META_BASE}/geo/geosite/category-ai-!cn.list" -o /tmp/ai3.list
+          merge_domain rules/ai-services.domain.list /tmp/ai1.list /tmp/ai2.list /tmp/ai3.list
+          echo "ai-services domain: $(wc -l < rules/ai-services.domain.list)"
+
+          # 4. 国外流媒体
+          #    domain: youtube + netflix + disney + hbo + primevideo + apple-tvplus + category-emby + category-entertainment
+          #    (spotify 独立)
+          #    ip: netflix(geoip)
+          for r in youtube netflix disney hbo primevideo apple-tvplus category-emby category-entertainment; do
+            curl -sL "${META_BASE}/geo/geosite/${r}.list" -o "/tmp/gs_${r}.list"
+          done
+          curl -sL "${META_BASE}/geo/geoip/netflix.list" -o /tmp/gs_nf_ip.list
+          merge_domain rules/global-streaming.domain.list /tmp/gs_youtube.list /tmp/gs_netflix.list /tmp/gs_disney.list \
+              /tmp/gs_hbo.list /tmp/gs_primevideo.list /tmp/gs_apple-tvplus.list \
+              /tmp/gs_category-emby.list /tmp/gs_category-entertainment.list
+          merge_ip rules/global-streaming.ip.list /tmp/gs_nf_ip.list
+          echo "global-streaming domain: $(wc -l < rules/global-streaming.domain.list)  ip: $(wc -l < rules/global-streaming.ip.list)"
+
+          # 5. 游戏平台（不含 bahamut，bahamut 独立）
+          #    domain: steam + category-games
+          curl -sL "${META_BASE}/geo/geosite/steam.list" -o /tmp/game1.list
+          curl -sL "${META_BASE}/geo/geosite/category-games.list" -o /tmp/game2.list
+          merge_domain rules/game-platforms.domain.list /tmp/game1.list /tmp/game2.list
+          echo "game-platforms domain: $(wc -l < rules/game-platforms.domain.list)"
+
+          # 6. GitHub（含 dev，只有 domain）
+          curl -sL "${META_BASE}/geo/geosite/github.list" -o /tmp/gh.list
+          if [ -f rules/dev.domain.list ]; then
+            merge_domain rules/github-all.domain.list /tmp/gh.list rules/dev.domain.list
+          else
+            merge_domain rules/github-all.domain.list /tmp/gh.list
+          fi
+          echo "github-all domain: $(wc -l < rules/github-all.domain.list)"
+
+          # 7. 谷歌服务
+          #    domain: google(geosite)
+          #    ip: google(geoip)
+          curl -sL "${META_BASE}/geo/geosite/google.list" -o /tmp/ga_domain.list
+          curl -sL "${META_BASE}/geo/geoip/google.list" -o /tmp/ga_ip.list
+          merge_domain rules/google-all.domain.list /tmp/ga_domain.list
+          merge_ip rules/google-all.ip.list /tmp/ga_ip.list
+          echo "google-all domain: $(wc -l < rules/google-all.domain.list)  ip: $(wc -l < rules/google-all.ip.list)"
+
+          # 8. 国内直连
+          #    domain: google-cn + category-games@cn + category-game-platforms-download + category-public-tracker + cn + private + custom_direct
+          #    ip: cn(geoip) + private(geoip)
+          curl -sL "${META_BASE}/geo/geosite/google-cn.list" -o /tmp/da_gcn.list
+          curl -sL "${META_BASE}/geo/geosite/category-games@cn.list" -o /tmp/da_gamescn.list
+          curl -sL "${META_BASE}/geo/geosite/category-game-platforms-download.list" -o /tmp/da_gpdownload.list
+          curl -sL "${META_BASE}/geo/geosite/category-public-tracker.list" -o /tmp/da_tracker.list
+          curl -sL "${META_BASE}/geo/geosite/cn.list" -o /tmp/da_cn.list
+          curl -sL "${META_BASE}/geo/geosite/private.list" -o /tmp/da_private.list
+          curl -sL "${META_BASE}/geo/geoip/cn.list" -o /tmp/da_cnip.list
+          curl -sL "${META_BASE}/geo/geoip/private.list" -o /tmp/da_privateip.list
+          merge_domain rules/direct-all.domain.list /tmp/da_gcn.list /tmp/da_gamescn.list /tmp/da_gpdownload.list \
+              /tmp/da_tracker.list /tmp/da_cn.list /tmp/da_private.list \
+              rules/custom_direct.domain.list 2>/dev/null
+          merge_ip rules/direct-all.ip.list /tmp/da_cnip.list /tmp/da_privateip.list
+          echo "direct-all domain: $(wc -l < rules/direct-all.domain.list)  ip: $(wc -l < rules/direct-all.ip.list)"
+
+          # 9. 独立规则（只有 domain）
+          for r in gfw paypal apple microsoft tiktok bahamut spotify category-speedtest; do
+            curl -sL "${META_BASE}/geo/geosite/${r}.list" -o "rules/${r}.domain.list"
+            echo "${r}: $(wc -l < rules/${r}.domain.list) entries"
+          done
+
+          # 10. 自定义规则（保留本地已有）
+          echo "custom rules preserved:"
+          for f in rules/custom_direct.domain.list rules/custom_proxy.domain.list rules/dev.domain.list; do
+            [ -f "$f" ] && echo "  $(wc -l < $f) entries in $f"
+          done
+
+      - name: Download icons
+        run: |
+          set -e
+          ICON_BASE="https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon"
+          mkdir -p assets/icons
+
+          echo "=== Downloading icons ==="
+
+          # HOMOMIX/Color/Large 下的大图
+          for f in Hong_Kong USA Japan Singapore Taiwan_Province Flight Network DIRECT Telegram Twitter GitHub AI_bot Google Apple_black Microsoft TikTok Bahamut_i PayPal Game SpeedTest Spotify; do
+            url="${ICON_BASE}/HOMOMIX/Color/Large/${f}.png"
+            echo "  → ${f}.png"
+            curl -sL "$url" -o "assets/icons/${f}.png"
+          done
+
+          # 根目录下的特殊图
+          curl -sL "${ICON_BASE}/11111.png" -o "assets/icons/11111.png"
+          curl -sL "${ICON_BASE}/match.png" -o "assets/icons/match.png"
+
+          echo "Done: $(ls assets/icons/*.png | wc -l) icons downloaded"
+
+      - name: Convert to MRS
+        run: |
+          chmod +x .github/bin/mihomo
+          # 构建 domain 类型的 mrs
+          for f in rules/*.domain.list; do
+            name=$(basename "$f" .domain.list)
+            echo "Building ${name}.mrs (domain)..."
+            .github/bin/mihomo convert-ruleset domain text "$f" "rules/${name}.mrs"
+          done
+          # 构建 IP 类型的 mrs
+          for f in rules/*.ip.list; do
+            name=$(basename "$f" .ip.list)
+            echo "Building ${name}.mrs (ipcidr)..."
+            .github/bin/mihomo convert-ruleset ipcidr text "$f" "rules/${name}.mrs"
+          done
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add rules/ assets/icons/
+          git diff --cached --quiet && echo "No changes to commit" || {
+            git commit -m "Auto-sync and merge rules from MetaCubeX [skip ci]"
+            git push
+          }

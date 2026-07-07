@@ -1,90 +1,110 @@
-# openclash-ruleset
+# OpenClash Ruleset
 
-OpenClash 自定义规则集仓库，配合覆写模块实现节点订阅转换——用你自己的策略分组和分流规则替代订阅自带的配置。
+OpenClash 自定义规则集仓库，自动从 [MetaCubeX/meta-rules-dat](https://github.com/MetaCubeX/meta-rules-dat) 同步合并规则，减少 rule-provider 数量，提高加载效率。
 
-## 快速开始
-
-1. Fork 本仓库，修改 `rules/*.list` 添加你需要的域名
-2. 上传 `config/my-groups.yaml` 到路由器 `/etc/openclash/config/`
-3. 在 LuCI **服务 → OpenClash → 覆写设置** 新建模块，内容同 `overwrite/my-overwrite.conf`
-4. 设置环境变量 `EN_KEY` = 你的订阅 URL
-5. Commit → Apply → 重启内核
-
-## 文件结构
+## 目录结构
 
 ```
-openclash-ruleset/
-├── config/my-groups.yaml          # 独立配置文件（策略分组 + 规则）
-├── overwrite/my-overwrite.conf    # 覆写模块（告诉 OpenClash 用 my-groups.yaml）
+├── .github/workflows/
+│   ├── sync-rules.yml        # 每天 UTC 4:00 拉取 MetaCubeX 合并规则 + 构建 .mrs
+│   └── build-mrs.yml         # 手动更新 .domain.list 时自动构建 .mrs
 ├── rules/
-│   └── dev.list                   # 开发者域名规则集
-├── .github/workflows/build-mrs.yml # 自动编译 .list → .mrs
+│   ├── custom_direct.domain.list   # [自定义] 直连域名列表（已合并到 direct-all）
+│   ├── custom_proxy.domain.list    # [自定义] 代理域名列表
+│   ├── dev.domain.list             # [自定义] 开发相关域名列表（已合并到 github-all）
+│   ├── direct-all.domain.list      # [合并] 国内直连 → 全球直连
+│   ├── instant-messaging.domain.list   # [合并] 即时通讯
+│   ├── social-media.domain.list        # [合并] 社交媒体
+│   ├── ai-services.domain.list         # [合并] AI服务
+│   ├── global-streaming.domain.list    # [合并] 国外流媒体
+│   ├── game-platforms.domain.list      # [合并] 游戏平台
+│   ├── github-all.domain.list          # [合并] GitHub + dev
+│   ├── google-all.domain.list          # [合并] 谷歌服务
+│   ├── gfw.domain.list              # GFW 列表
+│   ├── paypal.domain.list           # PayPal
+│   ├── apple.domain.list            # 苹果服务
+│   ├── microsoft.domain.list        # 微软服务
+│   ├── tiktok.domain.list           # TikTok
+│   └── bahamut.domain.list          # Bahamut
+├── my-groups.yaml       # OpenClash 主配置文件（策略组 + 规则）
 └── README.md
 ```
 
-## 架构
+## 规则合并对照
 
-```
-┌─────────────────────────┐
-│ my-overwrite.conf       │  ← LuCI 覆写模块
-│  CONFIG_FILE            │  → 指向 my-groups.yaml
-│  [Overwrite]            │  → 替换订阅 URL
-└────────┬────────────────┘
-         ▼
-┌─────────────────────────┐
-│ my-groups.yaml          │  ← 独立配置文件
-│  proxy-providers        │    引用订阅节点
-│  proxy-groups           │    策略分组（地区组 + 服务组）
-│  rule-providers         │    规则集来源（本仓库 + MetaCubeX 官方）
-│  rules                  │    分流规则
-└────────┬────────────────┘
-         ▼
-┌─────────────────────────┐
-│ Mihomo 内核             │  → 运行生效
-└─────────────────────────┘
-```
+| 策略组 | 合并后的规则集 | 来源 |
+|---|---|---|
+| **全球直连** | `direct-all` | google-cn + category-games@cn + category-game-platforms-download + category-public-tracker + cn + private + geoip:cn + geoip:private + custom_direct |
+| **即时通讯** | `instant-messaging` | category-communication + geoip:telegram |
+| **社交媒体** | `social-media` | category-social-media-!cn + geoip:twitter + geoip:facebook |
+| **AI服务** | `ai-services` | openai + google-gemini + category-ai-!cn |
+| **国外流媒体** | `global-streaming` | youtube + netflix + disney + hbo + primevideo + apple-tvplus + spotify + category-emby + category-entertainment + geoip:netflix |
+| **游戏平台** | `game-platforms` | steam + category-games |
+| **GitHub** | `github-all` | github + dev |
+| **谷歌服务** | `google-all` | google + geoip:google |
+| **自定义代理** | `custom_proxy` | 手动维护 |
 
-### 策略组设计
+合并前：**39 个 rule-provider** → 合并后：**17 个 rule-provider**
 
-- **5 个地区节点组**：香港/美国/日本/新加坡/台湾（url-test 自动选最优）
+## 工作流程
+
+### 自动同步（每日）
+`sync-rules.yml` 每天 UTC 4:00（北京时间 12:00）自动：
+1. 从 MetaCubeX 下载对应 `.list` 文件
+2. 按策略组合并、去重
+3. 用 mihomo 内核构建 `.mrs` 文件
+4. 提交推送至仓库
+
+### 手动更新
+1. 编辑 `rules/*.domain.list` 文件
+2. 推送后 `build-mrs.yml` 自动构建 `.mrs` 文件
+3. 路由器 OpenClash 下次更新规则时会拉取最新 `.mrs`
+
+## 自定义规则说明
+
+- `custom_direct.domain.list`：自定义直连域名（已合并到 `direct-all`）
+- `custom_proxy.domain.list`：自定义代理域名（独立 rule-provider，未合并）
+- `dev.domain.list`：开发者常用域名（已合并到 `github-all`）
+
+编辑后推送即可，GitHub Actions 自动构建 `.mrs`。
+
+## 策略组设计
+
+- **5 个地区节点组**：香港 / 美国 / 日本 / 新加坡 / 台湾（url-test 自动选最优）
 - **自动选择**：所有节点中测速选最优
 - **全球直连**：DIRECT
-- **服务组**：即时通讯、社交媒体、GitHub、AI 服务、谷歌/苹果/微软服务、国外流媒体、TikTok、游戏平台、测速工具 等
+- **服务组**：即时通讯、社交媒体、GitHub、AI服务、谷歌 / 苹果 / 微软服务、国外流媒体、TikTok、游戏平台、测速工具 等
 - **手动选择** + **漏网之鱼**：Select 类型，可手动切换节点
 
-### 规则集来源
+## 使用方法
 
-| 来源 | 数量 | 更新方式 |
-|------|------|----------|
-| MetaCubeX 官方 | 41 个 .mrs | 每 24 小时自动拉取 |
-| 本仓库 | dev.list | 每 24 小时自动拉取 |
-| 本仓库 | custom_direct/proxy.list | 每 24 小时自动拉取 |
+### OpenClash 路由器
 
-## 规则文件格式
-
-用 `classical` + `text` 格式，每行一条规则：
+1. 将 `my-groups.yaml` 上传到路由器 `/etc/openclash/config/` 目录
+2. 在 LuCI **服务 → OpenClash → 覆写设置** 新建覆写模块，配置项写入：
 
 ```
-DOMAIN-SUFFIX,bitbucket.org
-DOMAIN-SUFFIX,docker.io
-DOMAIN-KEYWORD,github
-IP-CIDR,1.2.3.0/24
+# 覆写配置
+config_file: my-groups.yaml
+
+# 订阅地址（可选，也可在插件设置中配置）
+# proxies:
+#   - name: Sub-store
+#     url: "你的订阅地址"
 ```
 
-修改 `rules/*.list` 后 push，GitHub Actions 自动编译 `.mrs`。
+3. 保存后重启 OpenClash
 
-## 自定义规则
+### 自定义添加域名
 
-在 LuCI **服务 → OpenClash → 覆写设置 → 规则** 中添加：
+1. 编辑对应 `.domain.list` 文件，添加域名（一行一个，支持 `+.` 前缀表示域名及子域名）
+2. 推送至 GitHub
+3. GitHub Actions 自动构建 `.mrs`
+4. 路由器 OpenClash 24 小时内自动拉取更新，或手动触发更新
 
-```
-- DOMAIN-SUFFIX,brew.sh,GitHub
-- DOMAIN-SUFFIX,gitlab.com,GitHub
-```
+## 与 MetaCubeX 官方规则的关系
 
-## DNS 配置
-
-DNS 由 LuCI 页面设置管理，覆写模块不干预。推荐：
-
-1. **插件设置 → DNS 设置**：自定义 DNS 开启，追加上游 DNS 开启
-2. **覆写设置 → DNS 设置**：Nameserver 添加运营商 DNS（如 `dhcp://`），Fallback 清空
+本仓库的大部分规则集内容源自 MetaCubeX 官方，优势在于：
+- **合并去重**：多个相关规则集合并为一个，OpenClash 只需加载 17 个 rule-provider（原需 39 个）
+- **每日同步**：自动跟踪上游更新
+- **自定义混合**：可在合并规则中混入自定义域名（如 `custom_direct` 合并进 `direct-all`）

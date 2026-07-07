@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - 'rules/*.domain.list'
+      - 'rules/*.ip.list'
   workflow_dispatch:
 
 jobs:
@@ -17,10 +18,17 @@ jobs:
       - name: Convert domain rules to MRS
         run: |
           chmod +x .github/bin/mihomo
+          # 构建 domain 类型的 mrs
           for f in rules/*.domain.list; do
             name=$(basename "$f" .domain.list)
-            echo "Building ${name}.mrs from ${name}.domain.list..."
+            echo "Building ${name}.mrs (domain)..."
             .github/bin/mihomo convert-ruleset domain text "$f" "rules/${name}.mrs"
+          done
+          # 构建 IP 类型的 mrs
+          for f in rules/*.ip.list; do
+            name=$(basename "$f" .ip.list)
+            echo "Building ${name}.mrs (ipcidr)..."
+            .github/bin/mihomo convert-ruleset ipcidr text "$f" "rules/${name}.mrs"
           done
           echo "Generated:"
           ls -la rules/*.mrs
