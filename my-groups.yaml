@@ -4,7 +4,7 @@
 # Icon 来源: https://github.com/Giveupmoon/Clash_Rules_Yaml
 # 通过 sync-rules.yml 同步到 assets/icons/
 proxy-providers:
-  #Sub-store:
+  Sub-store:
     type: http
     interval: 3600
     proxy: DIRECT
