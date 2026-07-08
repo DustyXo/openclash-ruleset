@@ -41,11 +41,12 @@ proxy-providers:
 proxy-groups:
 
   # --- 地区节点组（url-test 自动选最优） ---
-  - name: 香港节点
+  - name: 香港Vless
     type: url-test
     include-all: true
     filter: >-
-      ^(?=.*(?i)(港|🇭🇰|HK|Hong|HKG)).*$
+      ^(?=.*(?i)(港|🇭🇰|HK|Hong|HKG))(?!.*(?i)(hy|hysteria|HY2)).*$
+    exclude-type: "Hysteria2|Hysteria"
     tolerance: 20
     interval: 120
     url: https://cp.cloudflare.com/generate_204
@@ -61,21 +62,23 @@ proxy-groups:
     url: https://cp.cloudflare.com/generate_204
     icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/USA.png"
 
-  - name: 日本节点
+  - name: 日本Vless
     type: url-test
     include-all: true
     filter: >-
-      ^(?=.*(?i)(日|🇯🇵|JP|Japan|NRT|HND|KIX|CTS|FUK)).*$
+      ^(?=.*(?i)(日|🇯🇵|JP|Japan|NRT|HND|KIX|CTS|FUK))(?!.*(?i)(hy|hysteria|HY2)).*$
+    exclude-type: "Hysteria2|Hysteria"
     tolerance: 20
     interval: 120
     url: https://cp.cloudflare.com/generate_204
     icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/Japan.png"
 
-  - name: 新加坡节点
+  - name: 新加坡Vless
     type: url-test
     include-all: true
     filter: >-
-      ^(?=.*(?i)(坡|🇸🇬|SG|Sing|SIN|XSP)).*$
+      ^(?=.*(?i)(坡|🇸🇬|SG|Sing|SIN|XSP))(?!.*(?i)(hy|hysteria|HY2)).*$
+    exclude-type: "Hysteria2|Hysteria"
     tolerance: 20
     interval: 120
     url: https://cp.cloudflare.com/generate_204
@@ -104,10 +107,13 @@ proxy-groups:
   - name: 自定义代理
     type: select
     proxies:
-      - 香港节点
+      - 香港Vless
+      - 香港HY2
       - 美国节点
-      - 新加坡节点
-      - 日本节点
+      - 新加坡Vless
+      - 新加坡HY2
+      - 日本Vless
+      - 日本HY2
       - 台湾节点
       - 自动选择
       - 全球直连
@@ -128,10 +134,13 @@ proxy-groups:
   - name: 手动选择
     type: select
     proxies:
-      - 香港节点
+      - 香港Vless
+      - 香港HY2
       - 美国节点
-      - 日本节点
-      - 新加坡节点
+      - 日本Vless
+      - 日本HY2
+      - 新加坡Vless
+      - 新加坡HY2
       - 台湾节点
       - 自动选择
       - 全球直连
@@ -143,10 +152,13 @@ proxy-groups:
   - name: 漏网之鱼
     type: select
     proxies:
-      - 香港节点
+      - 香港Vless
+      - 香港HY2
       - 美国节点
-      - 新加坡节点
-      - 日本节点
+      - 新加坡Vless
+      - 新加坡HY2
+      - 日本Vless
+      - 日本HY2
       - 台湾节点
       - 手动选择
       - 自动选择
@@ -159,10 +171,13 @@ proxy-groups:
   - name: 即时通讯
     type: select
     proxies:
-      - 香港节点
+      - 香港Vless
+      - 香港HY2
       - 美国节点
-      - 新加坡节点
-      - 日本节点
+      - 新加坡Vless
+      - 新加坡HY2
+      - 日本Vless
+      - 日本HY2
       - 台湾节点
       - 手动选择
       - 自动选择
@@ -172,10 +187,13 @@ proxy-groups:
   - name: 社交媒体
     type: select
     proxies:
-      - 香港节点
+      - 香港Vless
+      - 香港HY2
       - 美国节点
-      - 新加坡节点
-      - 日本节点
+      - 新加坡Vless
+      - 新加坡HY2
+      - 日本Vless
+      - 日本HY2
       - 台湾节点
       - 手动选择
       - 自动选择
@@ -185,10 +203,13 @@ proxy-groups:
   - name: GitHub
     type: select
     proxies:
-      - 香港节点
+      - 香港Vless
+      - 香港HY2
       - 美国节点
-      - 新加坡节点
-      - 日本节点
+      - 新加坡Vless
+      - 新加坡HY2
+      - 日本Vless
+      - 日本HY2
       - 台湾节点
       - 手动选择
       - 自动选择
@@ -199,9 +220,12 @@ proxy-groups:
     type: select
     proxies:
       - 美国节点
-      - 香港节点
-      - 新加坡节点
-      - 日本节点
+      - 香港Vless
+      - 香港HY2
+      - 新加坡Vless
+      - 新加坡HY2
+      - 日本Vless
+      - 日本HY2
       - 台湾节点
       - 手动选择
       - 自动选择
@@ -211,10 +235,13 @@ proxy-groups:
   - name: 谷歌服务
     type: select
     proxies:
-      - 香港节点
+      - 香港Vless
+      - 香港HY2
       - 美国节点
-      - 新加坡节点
-      - 日本节点
+      - 新加坡Vless
+      - 新加坡HY2
+      - 日本Vless
+      - 日本HY2
       - 台湾节点
       - 手动选择
       - 自动选择
@@ -224,10 +251,13 @@ proxy-groups:
   - name: 苹果服务
     type: select
     proxies:
-      - 香港节点
+      - 香港Vless
+      - 香港HY2
       - 美国节点
-      - 新加坡节点
-      - 日本节点
+      - 新加坡Vless
+      - 新加坡HY2
+      - 日本Vless
+      - 日本HY2
       - 台湾节点
       - 手动选择
       - 自动选择
@@ -237,10 +267,13 @@ proxy-groups:
   - name: 微软服务
     type: select
     proxies:
-      - 香港节点
+      - 香港Vless
+      - 香港HY2
       - 美国节点
-      - 新加坡节点
-      - 日本节点
+      - 新加坡Vless
+      - 新加坡HY2
+      - 日本Vless
+      - 日本HY2
       - 台湾节点
       - 手动选择
       - 自动选择
@@ -250,10 +283,13 @@ proxy-groups:
   - name: 国外流媒体
     type: select
     proxies:
-      - 新加坡节点
-      - 香港节点
+      - 新加坡Vless
+      - 新加坡HY2
+      - 香港Vless
+      - 香港HY2
       - 美国节点
-      - 日本节点
+      - 日本Vless
+      - 日本HY2
       - 台湾节点
       - 手动选择
       - 自动选择
@@ -264,9 +300,12 @@ proxy-groups:
     type: select
     proxies:
       - 美国节点
-      - 香港节点
-      - 新加坡节点
-      - 日本节点
+      - 香港Vless
+      - 香港HY2
+      - 新加坡Vless
+      - 新加坡HY2
+      - 日本Vless
+      - 日本HY2
       - 台湾节点
       - 手动选择
       - 自动选择
@@ -277,10 +316,13 @@ proxy-groups:
     type: select
     proxies:
       - 台湾节点
-      - 香港节点
+      - 香港Vless
+      - 香港HY2
       - 美国节点
-      - 新加坡节点
-      - 日本节点
+      - 新加坡Vless
+      - 新加坡HY2
+      - 日本Vless
+      - 日本HY2
       - 手动选择
       - 自动选择
       - 全球直连
@@ -290,9 +332,12 @@ proxy-groups:
     type: select
     proxies:
       - 美国节点
-      - 香港节点
-      - 新加坡节点
-      - 日本节点
+      - 香港Vless
+      - 香港HY2
+      - 新加坡Vless
+      - 新加坡HY2
+      - 日本Vless
+      - 日本HY2
       - 台湾节点
       - 手动选择
       - 自动选择
@@ -302,10 +347,13 @@ proxy-groups:
   - name: 游戏平台
     type: select
     proxies:
-      - 香港节点
+      - 香港Vless
+      - 香港HY2
       - 美国节点
-      - 新加坡节点
-      - 日本节点
+      - 新加坡Vless
+      - 新加坡HY2
+      - 日本Vless
+      - 日本HY2
       - 台湾节点
       - 手动选择
       - 自动选择
@@ -315,10 +363,13 @@ proxy-groups:
   - name: 测速工具
     type: select
     proxies:
-      - 香港节点
+      - 香港Vless
+      - 香港HY2
       - 美国节点
-      - 新加坡节点
-      - 日本节点
+      - 新加坡Vless
+      - 新加坡HY2
+      - 日本Vless
+      - 日本HY2
       - 台湾节点
       - 手动选择
       - 自动选择
@@ -328,15 +379,50 @@ proxy-groups:
   - name: Spotify
     type: select
     proxies:
-      - 新加坡节点
-      - 香港节点
+      - 新加坡Vless
+      - 新加坡HY2
+      - 香港Vless
+      - 香港HY2
       - 美国节点
-      - 日本节点
+      - 日本Vless
+      - 日本HY2
       - 台湾节点
       - 手动选择
       - 自动选择
       - 全球直连
     icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/Spotify.png"
+
+
+  # --- 地区 HY2 节点组（下方显示） ---
+  - name: 香港HY2
+    type: url-test
+    include-all: true
+    filter: >-
+      ^(?=.*(?i)(港|🇭🇰|HK|Hong|HKG))(?=.*(?i)(hy|hysteria|HY2)).*$
+    tolerance: 20
+    interval: 120
+    url: https://cp.cloudflare.com/generate_204
+    icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/Hong_Kong.png"
+
+  - name: 日本HY2
+    type: url-test
+    include-all: true
+    filter: >-
+      ^(?=.*(?i)(日|🇯🇵|JP|Japan|NRT|HND|KIX|CTS|FUK))(?=.*(?i)(hy|hysteria|HY2)).*$
+    tolerance: 20
+    interval: 120
+    url: https://cp.cloudflare.com/generate_204
+    icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/Japan.png"
+
+  - name: 新加坡HY2
+    type: url-test
+    include-all: true
+    filter: >-
+      ^(?=.*(?i)(坡|🇸🇬|SG|Sing|SIN|XSP))(?=.*(?i)(hy|hysteria|HY2)).*$
+    tolerance: 20
+    interval: 120
+    url: https://cp.cloudflare.com/generate_204
+    icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/Singapore.png"
 
 # =========================================
 #            规则提供者
