@@ -49,7 +49,7 @@ proxy-groups:
     tolerance: 20
     interval: 120
     url: https://cp.cloudflare.com/generate_204
-    icon: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/assets/icons/Hong_Kong.png"
+    icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/Hong_Kong.png"
 
   - name: 美国节点
     type: url-test
@@ -59,7 +59,7 @@ proxy-groups:
     tolerance: 20
     interval: 120
     url: https://cp.cloudflare.com/generate_204
-    icon: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/assets/icons/USA.png"
+    icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/USA.png"
 
   - name: 日本节点
     type: url-test
@@ -69,7 +69,7 @@ proxy-groups:
     tolerance: 20
     interval: 120
     url: https://cp.cloudflare.com/generate_204
-    icon: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/assets/icons/Japan.png"
+    icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/Japan.png"
 
   - name: 新加坡节点
     type: url-test
@@ -79,7 +79,7 @@ proxy-groups:
     tolerance: 20
     interval: 120
     url: https://cp.cloudflare.com/generate_204
-    icon: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/assets/icons/Singapore.png"
+    icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/Singapore.png"
 
   - name: 台湾节点
     type: url-test
@@ -89,7 +89,7 @@ proxy-groups:
     tolerance: 20
     interval: 120
     url: https://cp.cloudflare.com/generate_204
-    icon: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/assets/icons/Taiwan_Province.png"
+    icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/Taiwan_Province.png"
 
   # --- 自动选择（所有节点测速选最优） ---
   - name: 自动选择
@@ -98,7 +98,7 @@ proxy-groups:
     tolerance: 20
     interval: 120
     url: https://cp.cloudflare.com/generate_204
-    icon: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/assets/icons/Flight.png"
+    icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/Flight.png"
 
   # --- 自定义独立代理（手动切换） ---
   - name: 自定义代理
@@ -113,7 +113,7 @@ proxy-groups:
       - 全球直连
     use:
       - Sub-store
-    icon: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/assets/icons/Network.png"
+    icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/Network.png"
 
   # --- 直连 ---
   - name: 全球直连
@@ -122,7 +122,7 @@ proxy-groups:
       - DIRECT
     tolerance: 100
     url: https://cp.cloudflare.com/generate_204
-    icon: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/assets/icons/DIRECT.png"
+    icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/DIRECT.png"
 
   # --- 手动选择（含所有节点） ---
   - name: 手动选择
@@ -137,7 +137,7 @@ proxy-groups:
       - 全球直连
     use:
       - Sub-store
-    icon: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/assets/icons/11111.png"
+    icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/11111.png"
 
   # --- 兜底 ---
   - name: 漏网之鱼
@@ -153,7 +153,7 @@ proxy-groups:
       - 全球直连
     use:
       - Sub-store
-    icon: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/assets/icons/match.png"
+    icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/match.png"
 
   # --- 服务策略组（精简合并后） ---
   - name: 即时通讯
@@ -167,7 +167,7 @@ proxy-groups:
       - 手动选择
       - 自动选择
       - 全球直连
-    icon: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/assets/icons/Telegram.png"
+    icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/Telegram.png"
 
   - name: 社交媒体
     type: select
@@ -180,7 +180,7 @@ proxy-groups:
       - 手动选择
       - 自动选择
       - 全球直连
-    icon: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/assets/icons/Twitter.png"
+    icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/Twitter.png"
 
   - name: GitHub
     type: select
@@ -193,7 +193,7 @@ proxy-groups:
       - 手动选择
       - 自动选择
       - 全球直连
-    icon: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/assets/icons/GitHub.png"
+    icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/GitHub.png"
 
   - name: AI服务
     type: select
@@ -206,7 +206,7 @@ proxy-groups:
       - 手动选择
       - 自动选择
       - 全球直连
-    icon: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/assets/icons/AI_bot.png"
+    icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/AI_bot.png"
 
   - name: 谷歌服务
     type: select
@@ -219,7 +219,7 @@ proxy-groups:
       - 手动选择
       - 自动选择
       - 全球直连
-    icon: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/assets/icons/Google.png"
+    icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/Google.png"
 
   - name: 苹果服务
     type: select
@@ -232,7 +232,7 @@ proxy-groups:
       - 手动选择
       - 自动选择
       - 全球直连
-    icon: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/assets/icons/Apple_black.png"
+    icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/Apple_black.png"
 
   - name: 微软服务
     type: select
@@ -245,7 +245,7 @@ proxy-groups:
       - 手动选择
       - 自动选择
       - 全球直连
-    icon: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/assets/icons/Microsoft.png"
+    icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/Microsoft.png"
 
   - name: 国外流媒体
     type: select
@@ -258,7 +258,7 @@ proxy-groups:
       - 手动选择
       - 自动选择
       - 全球直连
-    icon: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/assets/icons/Network.png"
+    icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/Network.png"
 
   - name: TikTok
     type: select
@@ -271,7 +271,7 @@ proxy-groups:
       - 手动选择
       - 自动选择
       - 全球直连
-    icon: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/assets/icons/TikTok.png"
+    icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/TikTok.png"
 
   - name: Bahamut
     type: select
@@ -284,7 +284,7 @@ proxy-groups:
       - 手动选择
       - 自动选择
       - 全球直连
-    icon: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/assets/icons/Bahamut_i.png"
+    icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/Bahamut_i.png"
 
   - name: PayPal
     type: select
@@ -297,7 +297,7 @@ proxy-groups:
       - 手动选择
       - 自动选择
       - 全球直连
-    icon: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/assets/icons/PayPal.png"
+    icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/PayPal.png"
 
   - name: 游戏平台
     type: select
@@ -310,7 +310,7 @@ proxy-groups:
       - 手动选择
       - 自动选择
       - 全球直连
-    icon: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/assets/icons/Game.png"
+    icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/Game.png"
 
   - name: 测速工具
     type: select
@@ -323,7 +323,7 @@ proxy-groups:
       - 手动选择
       - 自动选择
       - 全球直连
-    icon: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/assets/icons/SpeedTest.png"
+    icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/SpeedTest.png"
 
   - name: Spotify
     type: select
@@ -336,7 +336,7 @@ proxy-groups:
       - 手动选择
       - 自动选择
       - 全球直连
-    icon: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/assets/icons/Spotify.png"
+    icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/Spotify.png"
 
 # =========================================
 #            规则提供者
