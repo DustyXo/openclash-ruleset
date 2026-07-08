@@ -366,8 +366,8 @@ rule-providers:
     behavior: ipcidr
     format: mrs
     interval: 93600
-    url: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/rules/direct-all_ip.mrs"
-    path: ./rule_provider/direct-all_ip.mrs
+    url: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/rules/direct-all-ip.mrs"
+    path: ./rule_provider/direct-all-ip.mrs
 
   instant-messaging:
     type: http
@@ -382,8 +382,8 @@ rule-providers:
     behavior: ipcidr
     format: mrs
     interval: 100800
-    url: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/rules/instant-messaging_ip.mrs"
-    path: ./rule_provider/instant-messaging_ip.mrs
+    url: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/rules/instant-messaging-ip.mrs"
+    path: ./rule_provider/instant-messaging-ip.mrs
 
   social-media:
     type: http
@@ -398,8 +398,8 @@ rule-providers:
     behavior: ipcidr
     format: mrs
     interval: 108000
-    url: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/rules/social-media_ip.mrs"
-    path: ./rule_provider/social-media_ip.mrs
+    url: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/rules/social-media-ip.mrs"
+    path: ./rule_provider/social-media-ip.mrs
 
   ai-services:
     type: http
@@ -422,8 +422,8 @@ rule-providers:
     behavior: ipcidr
     format: mrs
     interval: 118800
-    url: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/rules/global-streaming_ip.mrs"
-    path: ./rule_provider/global-streaming_ip.mrs
+    url: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/rules/global-streaming-ip.mrs"
+    path: ./rule_provider/global-streaming-ip.mrs
 
   game-platforms:
     type: http
@@ -454,8 +454,8 @@ rule-providers:
     behavior: ipcidr
     format: mrs
     interval: 133200
-    url: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/rules/google-all_ip.mrs"
-    path: ./rule_provider/google-all_ip.mrs
+    url: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/rules/google-all-ip.mrs"
+    path: ./rule_provider/google-all-ip.mrs
 
   # --- 独立服务规则 ---
   gfw:

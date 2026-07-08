@@ -174,8 +174,8 @@ jobs:
           # 构建 IP 类型的 mrs
           for f in rules/*.ip.list; do
             name=$(basename "$f" .ip.list)
-            echo "Building ${name}.mrs (ipcidr)..."
-            .github/bin/mihomo convert-ruleset ipcidr text "$f" "rules/${name}.mrs"
+            echo "Building ${name}-ip.mrs (ipcidr)..."
+            .github/bin/mihomo convert-ruleset ipcidr text "$f" "rules/${name}-ip.mrs"
           done
 
       - name: Commit changes
