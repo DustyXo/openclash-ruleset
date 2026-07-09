@@ -6,7 +6,7 @@
 proxy-providers:
   Sub-store:
     type: http
-    interval: 3600
+    interval: 86400
     proxy: DIRECT
     health-check:
       enable: true
@@ -47,8 +47,6 @@ proxy-groups:
     filter: >-
       ^(?=.*(?i)(港|🇭🇰|HK|Hong|HKG)).*$
     exclude-type: "Hysteria2|Hysteria"
-    tolerance: 20
-    interval: 120
     url: https://cp.cloudflare.com/generate_204
     icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/Hong_Kong.png"
 
@@ -57,8 +55,6 @@ proxy-groups:
     include-all: true
     filter: >-
       ^(?=.*(?i)(美|🇺🇸|US|USA|SJC|JFK|LAX|ORD|ATL|DFW|SFO|MIA|SEA|IAD)).*$
-    tolerance: 20
-    interval: 120
     url: https://cp.cloudflare.com/generate_204
     icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/USA.png"
 
@@ -68,8 +64,6 @@ proxy-groups:
     filter: >-
       ^(?=.*(?i)(日|🇯🇵|JP|Japan|NRT|HND|KIX|CTS|FUK)).*$
     exclude-type: "Hysteria2|Hysteria"
-    tolerance: 20
-    interval: 120
     url: https://cp.cloudflare.com/generate_204
     icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/Japan.png"
 
@@ -79,8 +73,6 @@ proxy-groups:
     filter: >-
       ^(?=.*(?i)(坡|🇸🇬|SG|Sing|SIN|XSP)).*$
     exclude-type: "Hysteria2|Hysteria"
-    tolerance: 20
-    interval: 120
     url: https://cp.cloudflare.com/generate_204
     icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/Singapore.png"
 
@@ -89,8 +81,6 @@ proxy-groups:
     include-all: true
     filter: >-
       ^(?=.*(?i)(台|🇼🇸|🇹🇼|TW|tai|TPE|TSA|KHH)).*$
-    tolerance: 20
-    interval: 120
     url: https://cp.cloudflare.com/generate_204
     icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/Taiwan_Province.png"
 
@@ -98,8 +88,16 @@ proxy-groups:
   - name: 自动选择
     type: url-test
     include-all: true
-    tolerance: 20
-    interval: 120
+    url: https://cp.cloudflare.com/generate_204
+    icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/Flight.png"
+
+  # --- 香新日Hy2 节点组 ---
+  - name: 香新日Hy2
+    type: url-test
+    include-all: true
+    filter: >-
+      ^(?=.*(?i)(港|🇭🇰|HK|Hong|HKG|日|🇯🇵|JP|Japan|NRT|HND|KIX|CTS|FUK|坡|🇸🇬|SG|Sing|SIN|XSP)).*$
+    exclude-type: "Vless|Vmess"
     url: https://cp.cloudflare.com/generate_204
     icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/Flight.png"
 
@@ -121,11 +119,9 @@ proxy-groups:
 
   # --- 直连 ---
   - name: 全球直连
-    type: url-test
+    type: select
     proxies:
       - DIRECT
-    tolerance: 100
-    url: https://cp.cloudflare.com/generate_204
     icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/DIRECT.png"
 
   # --- 手动选择（含所有节点） ---
@@ -138,6 +134,7 @@ proxy-groups:
       - 新加坡Vless
       - 台湾节点
       - 自动选择
+      - 香新日Hy2
       - 全球直连
     use:
       - Sub-store
@@ -152,9 +149,10 @@ proxy-groups:
       - 新加坡Vless
       - 日本Vless
       - 台湾节点
+      - DIRECT
       - 手动选择
       - 自动选择
-      - 全球直连
+      - 香新日Hy2
     use:
       - Sub-store
     icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/match.png"
@@ -170,6 +168,7 @@ proxy-groups:
       - 台湾节点
       - 手动选择
       - 自动选择
+      - 香新日Hy2
       - 全球直连
     icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/Telegram.png"
 
@@ -183,6 +182,7 @@ proxy-groups:
       - 台湾节点
       - 手动选择
       - 自动选择
+      - 香新日Hy2
       - 全球直连
     icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/Twitter.png"
 
@@ -196,6 +196,7 @@ proxy-groups:
       - 台湾节点
       - 手动选择
       - 自动选择
+      - 香新日Hy2
       - 全球直连
     icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/GitHub.png"
 
@@ -209,6 +210,7 @@ proxy-groups:
       - 台湾节点
       - 手动选择
       - 自动选择
+      - 香新日Hy2
       - 全球直连
     icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/AI_bot.png"
 
@@ -222,6 +224,7 @@ proxy-groups:
       - 台湾节点
       - 手动选择
       - 自动选择
+      - 香新日Hy2
       - 全球直连
     icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/Google.png"
 
@@ -235,6 +238,7 @@ proxy-groups:
       - 台湾节点
       - 手动选择
       - 自动选择
+      - 香新日Hy2
       - 全球直连
     icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/Apple_black.png"
 
@@ -248,6 +252,7 @@ proxy-groups:
       - 台湾节点
       - 手动选择
       - 自动选择
+      - 香新日Hy2
       - 全球直连
     icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/Microsoft.png"
 
@@ -261,6 +266,7 @@ proxy-groups:
       - 台湾节点
       - 手动选择
       - 自动选择
+      - 香新日Hy2
       - 全球直连
     icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/Network.png"
 
@@ -274,6 +280,7 @@ proxy-groups:
       - 台湾节点
       - 手动选择
       - 自动选择
+      - 香新日Hy2
       - 全球直连
     icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/TikTok.png"
 
@@ -287,6 +294,7 @@ proxy-groups:
       - 日本Vless
       - 手动选择
       - 自动选择
+      - 香新日Hy2
       - 全球直连
     icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/Bahamut_i.png"
 
@@ -300,6 +308,7 @@ proxy-groups:
       - 台湾节点
       - 手动选择
       - 自动选择
+      - 香新日Hy2
       - 全球直连
     icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/PayPal.png"
 
@@ -313,6 +322,7 @@ proxy-groups:
       - 台湾节点
       - 手动选择
       - 自动选择
+      - 香新日Hy2
       - 全球直连
     icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/Game.png"
 
@@ -326,6 +336,7 @@ proxy-groups:
       - 台湾节点
       - 手动选择
       - 自动选择
+      - 香新日Hy2
       - 全球直连
     icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/SpeedTest.png"
 
@@ -339,22 +350,10 @@ proxy-groups:
       - 台湾节点
       - 手动选择
       - 自动选择
+      - 香新日Hy2
       - 全球直连
     icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/Spotify.png"
 
-
-
-  # --- 香新日Hy2 节点组 ---
-  - name: 香新日Hy2
-    type: url-test
-    include-all: true
-    filter: >-
-      ^(?=.*(?i)(港|🇭🇰|HK|Hong|HKG|日|🇯🇵|JP|Japan|NRT|HND|KIX|CTS|FUK|坡|🇸🇬|SG|Sing|SIN|XSP)).*$
-    exclude-type: "Vless|Vmess"
-    tolerance: 20
-    interval: 120
-    url: https://cp.cloudflare.com/generate_204
-    icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/Flight.png"
 
 # =========================================
 #            规则提供者
@@ -375,7 +374,7 @@ rule-providers:
     type: http
     behavior: domain
     format: mrs
-    interval: 90000
+    interval: 86400
     url: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/rules/direct-all.mrs"
     path: ./rule_provider/direct-all.mrs
 
@@ -383,7 +382,7 @@ rule-providers:
     type: http
     behavior: ipcidr
     format: mrs
-    interval: 93600
+    interval: 86400
     url: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/rules/direct-all-ip.mrs"
     path: ./rule_provider/direct-all-ip.mrs
 
@@ -391,7 +390,7 @@ rule-providers:
     type: http
     behavior: domain
     format: mrs
-    interval: 97200
+    interval: 86400
     url: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/rules/instant-messaging.mrs"
     path: ./rule_provider/instant-messaging.mrs
 
@@ -399,7 +398,7 @@ rule-providers:
     type: http
     behavior: ipcidr
     format: mrs
-    interval: 100800
+    interval: 86400
     url: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/rules/instant-messaging-ip.mrs"
     path: ./rule_provider/instant-messaging-ip.mrs
 
@@ -407,7 +406,7 @@ rule-providers:
     type: http
     behavior: domain
     format: mrs
-    interval: 104400
+    interval: 86400
     url: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/rules/social-media.mrs"
     path: ./rule_provider/social-media.mrs
 
@@ -415,7 +414,7 @@ rule-providers:
     type: http
     behavior: ipcidr
     format: mrs
-    interval: 108000
+    interval: 86400
     url: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/rules/social-media-ip.mrs"
     path: ./rule_provider/social-media-ip.mrs
 
@@ -423,7 +422,7 @@ rule-providers:
     type: http
     behavior: domain
     format: mrs
-    interval: 111600
+    interval: 86400
     url: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/rules/ai-services.mrs"
     path: ./rule_provider/ai-services.mrs
 
@@ -431,7 +430,7 @@ rule-providers:
     type: http
     behavior: domain
     format: mrs
-    interval: 115200
+    interval: 86400
     url: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/rules/global-streaming.mrs"
     path: ./rule_provider/global-streaming.mrs
 
@@ -439,7 +438,7 @@ rule-providers:
     type: http
     behavior: ipcidr
     format: mrs
-    interval: 118800
+    interval: 86400
     url: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/rules/global-streaming-ip.mrs"
     path: ./rule_provider/global-streaming-ip.mrs
 
@@ -447,7 +446,7 @@ rule-providers:
     type: http
     behavior: domain
     format: mrs
-    interval: 122400
+    interval: 86400
     url: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/rules/game-platforms.mrs"
     path: ./rule_provider/game-platforms.mrs
 
@@ -455,7 +454,7 @@ rule-providers:
     type: http
     behavior: domain
     format: mrs
-    interval: 126000
+    interval: 86400
     url: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/rules/github-all.mrs"
     path: ./rule_provider/github-all.mrs
 
@@ -463,7 +462,7 @@ rule-providers:
     type: http
     behavior: domain
     format: mrs
-    interval: 129600
+    interval: 86400
     url: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/rules/google-all.mrs"
     path: ./rule_provider/google-all.mrs
 
@@ -471,7 +470,7 @@ rule-providers:
     type: http
     behavior: ipcidr
     format: mrs
-    interval: 133200
+    interval: 86400
     url: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/rules/google-all-ip.mrs"
     path: ./rule_provider/google-all-ip.mrs
 
@@ -480,7 +479,7 @@ rule-providers:
     type: http
     behavior: domain
     format: mrs
-    interval: 136800
+    interval: 86400
     url: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/rules/gfw.mrs"
     path: ./rule_provider/gfw.mrs
 
@@ -488,7 +487,7 @@ rule-providers:
     type: http
     behavior: domain
     format: mrs
-    interval: 140400
+    interval: 86400
     url: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/rules/paypal.mrs"
     path: ./rule_provider/paypal.mrs
 
@@ -496,7 +495,7 @@ rule-providers:
     type: http
     behavior: domain
     format: mrs
-    interval: 144000
+    interval: 86400
     url: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/rules/apple.mrs"
     path: ./rule_provider/apple.mrs
 
@@ -504,7 +503,7 @@ rule-providers:
     type: http
     behavior: domain
     format: mrs
-    interval: 147600
+    interval: 86400
     url: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/rules/microsoft.mrs"
     path: ./rule_provider/microsoft.mrs
 
@@ -512,7 +511,7 @@ rule-providers:
     type: http
     behavior: domain
     format: mrs
-    interval: 151200
+    interval: 86400
     url: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/rules/bahamut.mrs"
     path: ./rule_provider/bahamut.mrs
 
@@ -520,7 +519,7 @@ rule-providers:
     type: http
     behavior: domain
     format: mrs
-    interval: 154800
+    interval: 86400
     url: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/rules/spotify.mrs"
     path: ./rule_provider/spotify.mrs
 
@@ -528,7 +527,7 @@ rule-providers:
     type: http
     behavior: domain
     format: mrs
-    interval: 158400
+    interval: 86400
     url: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/rules/tiktok.mrs"
     path: ./rule_provider/tiktok.mrs
 
@@ -536,7 +535,7 @@ rule-providers:
     type: http
     behavior: domain
     format: mrs
-    interval: 162000
+    interval: 86400
     url: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/rules/category-speedtest.mrs"
     path: ./rule_provider/category-speedtest.mrs
 
