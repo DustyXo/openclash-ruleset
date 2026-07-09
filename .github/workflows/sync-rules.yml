@@ -14,6 +14,41 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
+      - name: Check and update Mihomo binary
+        run: |
+          set -e
+          mkdir -p .github/bin
+
+          # 获取当前使用的版本
+          CURRENT_VER=""
+          if [ -f .github/bin/mihomo ]; then
+            CURRENT_VER=$(./.github/bin/mihomo -v 2>/dev/null | head -1 | grep -oP 'v?\d+\.\d+\.\d+' || echo "")
+          fi
+          echo "Current mihomo version: ${CURRENT_VER:-none}"
+
+          # 获取 GitHub 最新 release 版本
+          LATEST_VER=$(curl -sL https://api.github.com/repos/MetaCubeX/mihomo/releases/latest | grep '"tag_name"' | head -1 | grep -oP 'v?\d+\.\d+\.\d+')
+          echo "Latest mihomo version: ${LATEST_VER}"
+
+          if [ -z "$LATEST_VER" ]; then
+            echo "Failed to fetch latest version, skipping."
+            exit 0
+          fi
+
+          if [ "$CURRENT_VER" = "$LATEST_VER" ]; then
+            echo "Mihomo is up to date, skipping download."
+            exit 0
+          fi
+
+          echo "New version available, downloading mihomo ${LATEST_VER}..."
+          DOWNLOAD_URL="https://github.com/MetaCubeX/mihomo/releases/download/${LATEST_VER}/mihomo-linux-amd64-${LATEST_VER}.gz"
+          curl -sL "$DOWNLOAD_URL" -o /tmp/mihomo.gz
+          gunzip -f /tmp/mihomo.gz
+          chmod +x /tmp/mihomo
+          mv /tmp/mihomo .github/bin/mihomo
+          echo "Mihomo updated to ${LATEST_VER}"
+          echo "NEW_MIHOMO=true" >> "$GITHUB_ENV"
+
       - name: Download and merge rule lists
         run: |
           set -e
