@@ -48,7 +48,7 @@ proxy-groups:
       ^(?=.*(?i)(港|🇭🇰|HK|Hong|HKG)).*$
     exclude-type: "Hysteria2|Hysteria"
     url: https://cp.cloudflare.com/generate_204
-    icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/Hong_Kong.png"
+    icon: "https://fastly.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/Hong_Kong.png"
 
   - name: 美国节点
     type: url-test
@@ -56,7 +56,7 @@ proxy-groups:
     filter: >-
       ^(?=.*(?i)(美|🇺🇸|US|USA|SJC|JFK|LAX|ORD|ATL|DFW|SFO|MIA|SEA|IAD)).*$
     url: https://cp.cloudflare.com/generate_204
-    icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/USA.png"
+    icon: "https://fastly.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/USA.png"
 
   - name: 日本Vless
     type: url-test
@@ -65,7 +65,7 @@ proxy-groups:
       ^(?=.*(?i)(日|🇯🇵|JP|Japan|NRT|HND|KIX|CTS|FUK)).*$
     exclude-type: "Hysteria2|Hysteria"
     url: https://cp.cloudflare.com/generate_204
-    icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/Japan.png"
+    icon: "https://fastly.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/Japan.png"
 
   - name: 新加坡Vless
     type: url-test
@@ -74,7 +74,7 @@ proxy-groups:
       ^(?=.*(?i)(坡|🇸🇬|SG|Sing|SIN|XSP)).*$
     exclude-type: "Hysteria2|Hysteria"
     url: https://cp.cloudflare.com/generate_204
-    icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/Singapore.png"
+    icon: "https://fastly.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/Singapore.png"
 
   - name: 台湾节点
     type: url-test
@@ -82,14 +82,14 @@ proxy-groups:
     filter: >-
       ^(?=.*(?i)(台|🇼🇸|🇹🇼|TW|tai|TPE|TSA|KHH)).*$
     url: https://cp.cloudflare.com/generate_204
-    icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/Taiwan_Province.png"
+    icon: "https://fastly.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/Taiwan_Province.png"
 
   # --- 自动选择（所有节点测速选最优） ---
   - name: 自动选择
     type: url-test
     include-all: true
     url: https://cp.cloudflare.com/generate_204
-    icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/Flight.png"
+    icon: "https://fastly.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/Flight.png"
 
   # --- 香新日Hy2 节点组 ---
   - name: 香新日Hy2
@@ -99,7 +99,7 @@ proxy-groups:
       ^(?=.*(?i)(港|🇭🇰|HK|Hong|HKG|日|🇯🇵|JP|Japan|NRT|HND|KIX|CTS|FUK|坡|🇸🇬|SG|Sing|SIN|XSP)).*$
     exclude-type: "Vless|Vmess"
     url: https://cp.cloudflare.com/generate_204
-    icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/Flight.png"
+    icon: "https://fastly.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/Flight.png"
 
   # --- 自定义独立代理（手动切换） ---
   - name: 自定义代理
@@ -115,7 +115,7 @@ proxy-groups:
       - DIRECT
     use:
       - Sub-store
-    icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/Network.png"
+    icon: "https://fastly.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/Network.png"
 
   # --- 直连 ---
   - name: 全球直连
@@ -123,7 +123,7 @@ proxy-groups:
     proxies:
       - DIRECT
       - 手动选择
-    icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/DIRECT.png"
+    icon: "https://fastly.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/DIRECT.png"
 
   # --- 手动选择（含所有节点） ---
   - name: 手动选择
@@ -139,7 +139,7 @@ proxy-groups:
       - DIRECT
     use:
       - Sub-store
-    icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/11111.png"
+    icon: "https://fastly.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/11111.png"
 
   # --- 兜底 ---
   - name: 漏网之鱼
@@ -156,7 +156,7 @@ proxy-groups:
       - 香新日Hy2
     use:
       - Sub-store
-    icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/match.png"
+    icon: "https://fastly.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/match.png"
 
   # --- 服务策略组（精简合并后） ---
   - name: 即时通讯
@@ -171,7 +171,7 @@ proxy-groups:
       - 自动选择
       - 香新日Hy2
       - DIRECT
-    icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/Telegram.png"
+    icon: "https://fastly.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/Telegram.png"
 
   - name: 社交媒体
     type: select
@@ -185,7 +185,7 @@ proxy-groups:
       - 自动选择
       - 香新日Hy2
       - DIRECT
-    icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/Twitter.png"
+    icon: "https://fastly.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/Twitter.png"
 
   - name: GitHub
     type: select
@@ -199,7 +199,7 @@ proxy-groups:
       - 自动选择
       - 香新日Hy2
       - DIRECT
-    icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/GitHub.png"
+    icon: "https://fastly.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/GitHub.png"
 
   - name: AI服务
     type: select
@@ -213,7 +213,7 @@ proxy-groups:
       - 自动选择
       - 香新日Hy2
       - DIRECT
-    icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/AI_bot.png"
+    icon: "https://fastly.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/AI_bot.png"
 
   - name: 谷歌服务
     type: select
@@ -227,7 +227,7 @@ proxy-groups:
       - 自动选择
       - 香新日Hy2
       - DIRECT
-    icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/Google.png"
+    icon: "https://fastly.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/Google.png"
 
   - name: 苹果服务
     type: select
@@ -241,7 +241,7 @@ proxy-groups:
       - 自动选择
       - 香新日Hy2
       - DIRECT
-    icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/Apple_black.png"
+    icon: "https://fastly.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/Apple_black.png"
 
   - name: 微软服务
     type: select
@@ -255,7 +255,7 @@ proxy-groups:
       - 自动选择
       - 香新日Hy2
       - DIRECT
-    icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/Microsoft.png"
+    icon: "https://fastly.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/Microsoft.png"
 
   - name: 国外流媒体
     type: select
@@ -269,7 +269,7 @@ proxy-groups:
       - 自动选择
       - 香新日Hy2
       - DIRECT
-    icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/Network.png"
+    icon: "https://fastly.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/Network.png"
 
   - name: TikTok
     type: select
@@ -283,7 +283,7 @@ proxy-groups:
       - 自动选择
       - 香新日Hy2
       - DIRECT
-    icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/TikTok.png"
+    icon: "https://fastly.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/TikTok.png"
 
   - name: Bahamut
     type: select
@@ -297,7 +297,7 @@ proxy-groups:
       - 自动选择
       - 香新日Hy2
       - DIRECT
-    icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/Bahamut_i.png"
+    icon: "https://fastly.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/Bahamut_i.png"
 
   - name: PayPal
     type: select
@@ -311,7 +311,7 @@ proxy-groups:
       - 自动选择
       - 香新日Hy2
       - DIRECT
-    icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/PayPal.png"
+    icon: "https://fastly.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/PayPal.png"
 
   - name: 游戏平台
     type: select
@@ -325,7 +325,7 @@ proxy-groups:
       - 自动选择
       - 香新日Hy2
       - DIRECT
-    icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/Game.png"
+    icon: "https://fastly.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/Game.png"
 
   - name: 测速工具
     type: select
@@ -339,7 +339,7 @@ proxy-groups:
       - 自动选择
       - 香新日Hy2
       - DIRECT
-    icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/SpeedTest.png"
+    icon: "https://fastly.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/SpeedTest.png"
 
   - name: Spotify
     type: select
@@ -353,7 +353,7 @@ proxy-groups:
       - 自动选择
       - 香新日Hy2
       - DIRECT
-    icon: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/Spotify.png"
+    icon: "https://fastly.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/Spotify.png"
 
 
 # =========================================
@@ -367,7 +367,7 @@ rule-providers:
     behavior: domain
     format: mrs
     interval: 86400
-    url: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/rules/custom_proxy.mrs"
+    url: "https://fastly.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/rules/custom_proxy.mrs"
     path: ./rule_provider/custom_proxy.mrs
 
   # --- 合并规则集 domain 部分 ---
@@ -376,7 +376,7 @@ rule-providers:
     behavior: domain
     format: mrs
     interval: 86400
-    url: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/rules/direct-all.mrs"
+    url: "https://fastly.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/rules/direct-all.mrs"
     path: ./rule_provider/direct-all.mrs
 
   direct-all_ip:
@@ -384,7 +384,7 @@ rule-providers:
     behavior: ipcidr
     format: mrs
     interval: 86400
-    url: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/rules/direct-all-ip.mrs"
+    url: "https://fastly.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/rules/direct-all-ip.mrs"
     path: ./rule_provider/direct-all-ip.mrs
 
   instant-messaging:
@@ -392,7 +392,7 @@ rule-providers:
     behavior: domain
     format: mrs
     interval: 86400
-    url: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/rules/instant-messaging.mrs"
+    url: "https://fastly.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/rules/instant-messaging.mrs"
     path: ./rule_provider/instant-messaging.mrs
 
   instant-messaging_ip:
@@ -400,7 +400,7 @@ rule-providers:
     behavior: ipcidr
     format: mrs
     interval: 86400
-    url: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/rules/instant-messaging-ip.mrs"
+    url: "https://fastly.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/rules/instant-messaging-ip.mrs"
     path: ./rule_provider/instant-messaging-ip.mrs
 
   social-media:
@@ -408,7 +408,7 @@ rule-providers:
     behavior: domain
     format: mrs
     interval: 86400
-    url: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/rules/social-media.mrs"
+    url: "https://fastly.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/rules/social-media.mrs"
     path: ./rule_provider/social-media.mrs
 
   social-media_ip:
@@ -416,7 +416,7 @@ rule-providers:
     behavior: ipcidr
     format: mrs
     interval: 86400
-    url: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/rules/social-media-ip.mrs"
+    url: "https://fastly.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/rules/social-media-ip.mrs"
     path: ./rule_provider/social-media-ip.mrs
 
   ai-services:
@@ -424,7 +424,7 @@ rule-providers:
     behavior: domain
     format: mrs
     interval: 86400
-    url: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/rules/ai-services.mrs"
+    url: "https://fastly.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/rules/ai-services.mrs"
     path: ./rule_provider/ai-services.mrs
 
   global-streaming:
@@ -432,7 +432,7 @@ rule-providers:
     behavior: domain
     format: mrs
     interval: 86400
-    url: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/rules/global-streaming.mrs"
+    url: "https://fastly.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/rules/global-streaming.mrs"
     path: ./rule_provider/global-streaming.mrs
 
   global-streaming_ip:
@@ -440,7 +440,7 @@ rule-providers:
     behavior: ipcidr
     format: mrs
     interval: 86400
-    url: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/rules/global-streaming-ip.mrs"
+    url: "https://fastly.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/rules/global-streaming-ip.mrs"
     path: ./rule_provider/global-streaming-ip.mrs
 
   game-platforms:
@@ -448,7 +448,7 @@ rule-providers:
     behavior: domain
     format: mrs
     interval: 86400
-    url: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/rules/game-platforms.mrs"
+    url: "https://fastly.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/rules/game-platforms.mrs"
     path: ./rule_provider/game-platforms.mrs
 
   github-all:
@@ -456,7 +456,7 @@ rule-providers:
     behavior: domain
     format: mrs
     interval: 86400
-    url: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/rules/github-all.mrs"
+    url: "https://fastly.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/rules/github-all.mrs"
     path: ./rule_provider/github-all.mrs
 
   google-all:
@@ -464,7 +464,7 @@ rule-providers:
     behavior: domain
     format: mrs
     interval: 86400
-    url: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/rules/google-all.mrs"
+    url: "https://fastly.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/rules/google-all.mrs"
     path: ./rule_provider/google-all.mrs
 
   google-all_ip:
@@ -472,7 +472,7 @@ rule-providers:
     behavior: ipcidr
     format: mrs
     interval: 86400
-    url: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/rules/google-all-ip.mrs"
+    url: "https://fastly.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/rules/google-all-ip.mrs"
     path: ./rule_provider/google-all-ip.mrs
 
   # --- 独立服务规则 ---
@@ -481,7 +481,7 @@ rule-providers:
     behavior: domain
     format: mrs
     interval: 86400
-    url: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/rules/gfw.mrs"
+    url: "https://fastly.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/rules/gfw.mrs"
     path: ./rule_provider/gfw.mrs
 
   paypal:
@@ -489,7 +489,7 @@ rule-providers:
     behavior: domain
     format: mrs
     interval: 86400
-    url: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/rules/paypal.mrs"
+    url: "https://fastly.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/rules/paypal.mrs"
     path: ./rule_provider/paypal.mrs
 
   apple:
@@ -497,7 +497,7 @@ rule-providers:
     behavior: domain
     format: mrs
     interval: 86400
-    url: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/rules/apple.mrs"
+    url: "https://fastly.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/rules/apple.mrs"
     path: ./rule_provider/apple.mrs
 
   microsoft:
@@ -505,7 +505,7 @@ rule-providers:
     behavior: domain
     format: mrs
     interval: 86400
-    url: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/rules/microsoft.mrs"
+    url: "https://fastly.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/rules/microsoft.mrs"
     path: ./rule_provider/microsoft.mrs
 
   bahamut:
@@ -513,7 +513,7 @@ rule-providers:
     behavior: domain
     format: mrs
     interval: 86400
-    url: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/rules/bahamut.mrs"
+    url: "https://fastly.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/rules/bahamut.mrs"
     path: ./rule_provider/bahamut.mrs
 
   spotify:
@@ -521,7 +521,7 @@ rule-providers:
     behavior: domain
     format: mrs
     interval: 86400
-    url: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/rules/spotify.mrs"
+    url: "https://fastly.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/rules/spotify.mrs"
     path: ./rule_provider/spotify.mrs
 
   tiktok:
@@ -529,7 +529,7 @@ rule-providers:
     behavior: domain
     format: mrs
     interval: 86400
-    url: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/rules/tiktok.mrs"
+    url: "https://fastly.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/rules/tiktok.mrs"
     path: ./rule_provider/tiktok.mrs
 
   category-speedtest:
@@ -537,7 +537,7 @@ rule-providers:
     behavior: domain
     format: mrs
     interval: 86400
-    url: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/rules/category-speedtest.mrs"
+    url: "https://fastly.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/rules/category-speedtest.mrs"
     path: ./rule_provider/category-speedtest.mrs
 
 # =========================================
