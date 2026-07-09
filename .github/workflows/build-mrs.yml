@@ -15,6 +15,32 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
+      - name: Merge dev into github-all
+        run: |
+          if [ -f rules/dev.domain.list ]; then
+            echo "Merging dev.domain.list into github-all.domain.list..."
+            grep -v '/' rules/dev.domain.list | sort -u > /tmp/dev_merged.list 2>/dev/null || true
+            if [ -s /tmp/dev_merged.list ]; then
+              cat /tmp/dev_merged.list >> rules/github-all.domain.list
+              sort -u rules/github-all.domain.list -o rules/github-all.domain.list
+              sed -i '/^$/d' rules/github-all.domain.list
+            fi
+            echo "github-all merged: $(wc -l < rules/github-all.domain.list) entries"
+          fi
+
+      - name: Merge custom_direct into direct-all
+        run: |
+          if [ -f rules/custom_direct.domain.list ]; then
+            echo "Merging custom_direct.domain.list into direct-all.domain.list..."
+            grep -v '/' rules/custom_direct.domain.list | sort -u > /tmp/cd_merged.list 2>/dev/null || true
+            if [ -s /tmp/cd_merged.list ]; then
+              cat /tmp/cd_merged.list >> rules/direct-all.domain.list
+              sort -u rules/direct-all.domain.list -o rules/direct-all.domain.list
+              sed -i '/^$/d' rules/direct-all.domain.list
+            fi
+            echo "direct-all merged: $(wc -l < rules/direct-all.domain.list) entries"
+          fi
+
       - name: Convert domain rules to MRS
         run: |
           chmod +x .github/bin/mihomo
@@ -37,5 +63,5 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add rules/*.mrs
+          git add rules/*.mrs rules/github-all.domain.list rules/direct-all.domain.list
           git diff --cached --quiet && echo "No changes" || (git commit -m "Auto-build MRS [skip ci]" && git push)
