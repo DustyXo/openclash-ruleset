@@ -367,7 +367,7 @@ rule-providers:
     behavior: domain
     format: mrs
     interval: 86400
-    url: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/rules/custom_proxy.mrs"
+    url: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/rules/custom_proxy.mrs"
     path: ./rule_provider/custom_proxy.mrs
 
   # --- 合并规则集 domain 部分 ---
@@ -376,7 +376,7 @@ rule-providers:
     behavior: domain
     format: mrs
     interval: 86400
-    url: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/rules/direct-all.mrs"
+    url: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/rules/direct-all.mrs"
     path: ./rule_provider/direct-all.mrs
 
   direct-all_ip:
@@ -384,7 +384,7 @@ rule-providers:
     behavior: ipcidr
     format: mrs
     interval: 86400
-    url: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/rules/direct-all-ip.mrs"
+    url: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/rules/direct-all-ip.mrs"
     path: ./rule_provider/direct-all-ip.mrs
 
   instant-messaging:
@@ -392,7 +392,7 @@ rule-providers:
     behavior: domain
     format: mrs
     interval: 86400
-    url: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/rules/instant-messaging.mrs"
+    url: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/rules/instant-messaging.mrs"
     path: ./rule_provider/instant-messaging.mrs
 
   instant-messaging_ip:
@@ -400,7 +400,7 @@ rule-providers:
     behavior: ipcidr
     format: mrs
     interval: 86400
-    url: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/rules/instant-messaging-ip.mrs"
+    url: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/rules/instant-messaging-ip.mrs"
     path: ./rule_provider/instant-messaging-ip.mrs
 
   social-media:
@@ -408,7 +408,7 @@ rule-providers:
     behavior: domain
     format: mrs
     interval: 86400
-    url: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/rules/social-media.mrs"
+    url: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/rules/social-media.mrs"
     path: ./rule_provider/social-media.mrs
 
   social-media_ip:
@@ -416,7 +416,7 @@ rule-providers:
     behavior: ipcidr
     format: mrs
     interval: 86400
-    url: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/rules/social-media-ip.mrs"
+    url: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/rules/social-media-ip.mrs"
     path: ./rule_provider/social-media-ip.mrs
 
   ai-services:
@@ -424,7 +424,7 @@ rule-providers:
     behavior: domain
     format: mrs
     interval: 86400
-    url: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/rules/ai-services.mrs"
+    url: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/rules/ai-services.mrs"
     path: ./rule_provider/ai-services.mrs
 
   global-streaming:
@@ -432,7 +432,7 @@ rule-providers:
     behavior: domain
     format: mrs
     interval: 86400
-    url: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/rules/global-streaming.mrs"
+    url: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/rules/global-streaming.mrs"
     path: ./rule_provider/global-streaming.mrs
 
   global-streaming_ip:
@@ -440,7 +440,7 @@ rule-providers:
     behavior: ipcidr
     format: mrs
     interval: 86400
-    url: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/rules/global-streaming-ip.mrs"
+    url: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/rules/global-streaming-ip.mrs"
     path: ./rule_provider/global-streaming-ip.mrs
 
   game-platforms:
@@ -448,7 +448,7 @@ rule-providers:
     behavior: domain
     format: mrs
     interval: 86400
-    url: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/rules/game-platforms.mrs"
+    url: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/rules/game-platforms.mrs"
     path: ./rule_provider/game-platforms.mrs
 
   github-all:
@@ -456,7 +456,7 @@ rule-providers:
     behavior: domain
     format: mrs
     interval: 86400
-    url: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/rules/github-all.mrs"
+    url: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/rules/github-all.mrs"
     path: ./rule_provider/github-all.mrs
 
   google-all:
@@ -464,7 +464,7 @@ rule-providers:
     behavior: domain
     format: mrs
     interval: 86400
-    url: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/rules/google-all.mrs"
+    url: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/rules/google-all.mrs"
     path: ./rule_provider/google-all.mrs
 
   google-all_ip:
@@ -472,7 +472,7 @@ rule-providers:
     behavior: ipcidr
     format: mrs
     interval: 86400
-    url: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/rules/google-all-ip.mrs"
+    url: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/rules/google-all-ip.mrs"
     path: ./rule_provider/google-all-ip.mrs
 
   # --- 独立服务规则 ---
@@ -481,7 +481,7 @@ rule-providers:
     behavior: domain
     format: mrs
     interval: 86400
-    url: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/rules/gfw.mrs"
+    url: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/rules/gfw.mrs"
     path: ./rule_provider/gfw.mrs
 
   paypal:
@@ -489,7 +489,7 @@ rule-providers:
     behavior: domain
     format: mrs
     interval: 86400
-    url: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/rules/paypal.mrs"
+    url: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/rules/paypal.mrs"
     path: ./rule_provider/paypal.mrs
 
   apple:
@@ -497,7 +497,7 @@ rule-providers:
     behavior: domain
     format: mrs
     interval: 86400
-    url: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/rules/apple.mrs"
+    url: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/rules/apple.mrs"
     path: ./rule_provider/apple.mrs
 
   microsoft:
@@ -505,7 +505,7 @@ rule-providers:
     behavior: domain
     format: mrs
     interval: 86400
-    url: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/rules/microsoft.mrs"
+    url: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/rules/microsoft.mrs"
     path: ./rule_provider/microsoft.mrs
 
   bahamut:
@@ -513,7 +513,7 @@ rule-providers:
     behavior: domain
     format: mrs
     interval: 86400
-    url: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/rules/bahamut.mrs"
+    url: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/rules/bahamut.mrs"
     path: ./rule_provider/bahamut.mrs
 
   spotify:
@@ -521,7 +521,7 @@ rule-providers:
     behavior: domain
     format: mrs
     interval: 86400
-    url: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/rules/spotify.mrs"
+    url: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/rules/spotify.mrs"
     path: ./rule_provider/spotify.mrs
 
   tiktok:
@@ -529,7 +529,7 @@ rule-providers:
     behavior: domain
     format: mrs
     interval: 86400
-    url: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/rules/tiktok.mrs"
+    url: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/rules/tiktok.mrs"
     path: ./rule_provider/tiktok.mrs
 
   category-speedtest:
@@ -537,7 +537,7 @@ rule-providers:
     behavior: domain
     format: mrs
     interval: 86400
-    url: "https://raw.githubusercontent.com/DustyXo/openclash-ruleset/main/rules/category-speedtest.mrs"
+    url: "https://cdn.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/rules/category-speedtest.mrs"
     path: ./rule_provider/category-speedtest.mrs
 
 # =========================================
