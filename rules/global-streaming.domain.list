@@ -89,6 +89,15 @@
 +.apexlegends.com
 +.appget.com
 +.apple-itunes.cn
++.applemusic.berlin
++.applemusic.co
++.applemusic.com
++.applemusic.com.au
++.applemusic.hamburg
++.applemusic.wang
++.applemusicconnect.com
++.applemusicfestival.com
++.applepodcasts.com
 +.appmedia.jp
 +.archiveofourown.com
 +.archiveofourown.net
@@ -888,7 +897,9 @@
 +.mudvod.tv
 +.muscdn.com
 +.mushymush.tv
++.music.apple.com
 +.musical.ly
++.musickit.net
 +.muvluv-girls-garden.com
 +.myhulu.com
 +.mynavi.jp
@@ -1096,6 +1107,7 @@
 +.plutotv.net
 +.pocketcasts.com
 +.podcast.apple.com
++.podcasts.apple.com
 +.pogo.com
 +.pogobeta.com
 +.pokedex3d.com
@@ -1555,6 +1567,7 @@
 +.wwe9.com
 +.wwr-stardom.com
 +.wwtbam.com
++.wwwapplemusic.com
 +.wwwhuluplus.com
 +.wwwitunes.com
 +.xbox
@@ -1795,6 +1808,9 @@ agasg1.jmsooo.com
 alibaba.cdn.steampipe.steamcontent.com
 amp-api-edge-lb-cn.itunes-apple.com.akadns.net
 amp-api-edge-lb.itunes-apple.com.akadns.net
+amp-api-edge.music.apple.com
+amp-api.music.apple.com
+amp-api.podcasts.apple.com
 aod-ssl.itunes.apple.com
 aod.itunes.apple.com
 api.viu.now.com
@@ -1939,6 +1955,7 @@ itunes.apple.com
 itunesconnect.apple.com
 jellyfin.xeton.dev
 jmsooo.com
+js-cdn.music.apple.com
 lastfm.freetls.fastly.net
 lazer.ppy.sh
 lgcscc-hamivideo2.cdn.hinet.net
@@ -1952,6 +1969,8 @@ misc-assets.itunes.apple.com
 mobilelive-hamivideo.cdn.hinet.net
 movie.xeton.dev
 msh.amazon.co.uk
+music.apple.com
+musicstatus.music.apple.com
 mvod.itunes.apple.com
 myapp.itunes.apple.com
 netflix.com.edgesuite.net
@@ -1977,7 +1996,10 @@ pd.itunes.apple.com
 play-edge.itunes.apple.com
 play.charontv.com
 play.itunes.apple.com
+play.music.apple.com
 plex.llon.net
+podcasts.apple.com
+podcasts.itunes.apple.com
 pornemby.club
 prd-priconne-redive.akamaized.net
 prodforza.blob.core.windows.net
@@ -2009,6 +2031,7 @@ sf-api-token-service.itunes.apple.com
 sg.jmsooo.com
 sp.itunes.apple.com
 spectator.ppy.sh
+speedysub.music.apple.com
 spotify.com.edgesuite.net
 spotify.map.fastly.net
 spotify.map.fastlylb.net
