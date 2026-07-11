@@ -552,12 +552,12 @@ rule-providers:
 #                 规则配置
 # =========================================
 rules:
-  # --- 自定义代理 ---
-  - RULE-SET,custom_proxy,自定义代理
-
   # --- 国内/直连 ---
   - RULE-SET,direct-all,全球直连
   - RULE-SET,direct-all_ip,全球直连,no-resolve
+
+  # --- 自定义代理 ---
+  - RULE-SET,custom_proxy,自定义代理
 
   # --- 服务分流 ---
   - RULE-SET,instant-messaging,即时通讯
