@@ -3,8 +3,9 @@
 # =========================================
 dns:
   nameserver-policy:
-    '+.googleapis.cn': '8.8.8.8'
-    '+.services.googleapis.cn': '8.8.8.8'
+    '+.services.googleapis.cn': 'https://dns.google/dns-query'
+    '+.googleapis.cn': 'https://dns.google/dns-query'
+    '+.xn--ngstr-lra8j.com': 'https://dns.google/dns-query'
 
 # =========================================
 #              代理提供商
