@@ -1,10 +1,10 @@
 # =========================================
 #              DNS 设置
 # =========================================
-dns:
-  nameserver-policy:
-    '+.googleapis.cn': 'https://dns.google/dns-query'
-    '+.services.googleapis.cn': 'https://dns.google/dns-query'
+#dns:
+#  nameserver-policy:
+#    '+.googleapis.cn': 'https://dns.google/dns-query'
+#    '+.services.googleapis.cn': 'https://dns.google/dns-query'
 
 # =========================================
 #              代理提供商
