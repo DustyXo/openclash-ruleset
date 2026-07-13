@@ -552,10 +552,6 @@ rule-providers:
 #                 规则配置
 # =========================================
 rules:
-  # --- 国内/直连 ---
-  - RULE-SET,direct-all,全球直连
-  - RULE-SET,direct-all_ip,全球直连,no-resolve
-
   # --- 自定义代理 ---
   - RULE-SET,custom_proxy,自定义代理
 
@@ -580,5 +576,9 @@ rules:
   - RULE-SET,tiktok,TikTok
   - RULE-SET,gfw,手动选择
 
-  # --- 兜底 ---
+  # --- 国内/直连（兜底） ---
+  - RULE-SET,direct-all,全球直连
+  - RULE-SET,direct-all_ip,全球直连,no-resolve
+
+  # --- 最终兜底 ---
   - MATCH,漏网之鱼
