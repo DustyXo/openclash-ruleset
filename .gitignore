@@ -1,1 +1,5 @@
-assets/.DS_Store
+# macOS 系统文件
+.DS_Store
+
+# Claude Code 配置（本地专用，不推送）
+.claude/
