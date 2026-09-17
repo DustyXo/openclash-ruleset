@@ -1,11 +1,13 @@
 # =========================================
 #              DNS 设置
 # =========================================
-dns:
-  nameserver-policy:
-    '+.services.googleapis.cn': 'https://dns.google/dns-query'
-    '+.googleapis.cn': 'https://dns.google/dns-query'
-    '+.xn--ngstr-lra8j.com': 'https://dns.google/dns-query'
+# 已移除 nameserver-policy（2026-09-18）：
+#   原策略把下面三个域名指向 https://dns.google/dns-query，
+#   但插件 respect-rules=0 时该 DoH 查询走直连、在国内被墙 → 解析超时失败，
+#   导致 Google Play 下载卡在「等待中」（services.googleapis.cn 是 Play 中国区服务域名）。
+#   - services.googleapis.cn：国内 DNS 可正常解析，无需特殊策略
+#   - googleapis.cn / xn--ngstr-lra8j.com：裸域名本身无任何 A/AAAA/CNAME 记录，原策略无意义
+#   DNS 段其余配置由 OpenClash 插件（yml_change.sh）按插件设置生成，无需在此声明。
 
 # =========================================
 #              代理提供商
