@@ -555,6 +555,13 @@ rule-providers:
 #                 规则配置
 # =========================================
 rules:
+  # --- Google Play 下载 CDN（ångström.com）强制直连 ---
+  #   *.xn--ngstr-lra8j.com 是 Play 商店 APK 的下载 CDN，解析到国内 Google 缓存节点
+  #   （如 58.254.137.196），该节点只服务国内 IP：走代理会 TLS 握手被丢弃
+  #   （实测上传 1.8KB / 下载 0 字节），Play 因此永远停在「等待中」。
+  #   必须排在 custom_proxy / google-all 之前直连。
+  - DOMAIN-SUFFIX,xn--ngstr-lra8j.com,全球直连
+
   # --- 自定义代理 ---
   - RULE-SET,custom_proxy,自定义代理
 
