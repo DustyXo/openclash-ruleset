@@ -91,7 +91,7 @@ proxy-groups:
     type: url-test
     include-all: true
     filter: >-
-      ^(?=.*(?i)(台|🇼🇸|🇹🇼|TW|tai|TPE|TSA|KHH)).*$
+      ^(?=.*(?i)(台|TW|tai|TPE|TSA|KHH)).*$
     url: https://cp.cloudflare.com/generate_204
     icon: "https://fastly.jsdelivr.net/gh/DustyXo/openclash-ruleset@main/assets/icons/Taiwan_Province.png"
 
