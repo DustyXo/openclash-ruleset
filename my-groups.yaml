@@ -1,15 +1,4 @@
 # =========================================
-#              DNS 设置
-# =========================================
-# 已移除 nameserver-policy（2026-09-18）：
-#   原策略把下面三个域名指向 https://dns.google/dns-query，
-#   但插件 respect-rules=0 时该 DoH 查询走直连、在国内被墙 → 解析超时失败，
-#   导致 Google Play 下载卡在「等待中」（services.googleapis.cn 是 Play 中国区服务域名）。
-#   - services.googleapis.cn：国内 DNS 可正常解析，无需特殊策略
-#   - googleapis.cn / xn--ngstr-lra8j.com：裸域名本身无任何 A/AAAA/CNAME 记录，原策略无意义
-#   DNS 段其余配置由 OpenClash 插件（yml_change.sh）按插件设置生成，无需在此声明。
-
-# =========================================
 #              代理提供商
 # =========================================
 # Icon 来源: https://github.com/Giveupmoon/Clash_Rules_Yaml
@@ -555,12 +544,17 @@ rule-providers:
 #                 规则配置
 # =========================================
 rules:
-  # --- Google Play 下载 CDN（ångström.com）强制直连 ---
-  #   *.xn--ngstr-lra8j.com 是 Play 商店 APK 的下载 CDN，解析到国内 Google 缓存节点
-  #   （如 58.254.137.196），该节点只服务国内 IP：走代理会 TLS 握手被丢弃
-  #   （实测上传 1.8KB / 下载 0 字节），Play 因此永远停在「等待中」。
-  #   必须排在 custom_proxy / google-all 之前直连。
-  - DOMAIN-SUFFIX,xn--ngstr-lra8j.com,全球直连
+  # --- Google Play 下载 CDN（ångström.com）按解析属地分流 ---
+  #   *.xn--ngstr-lra8j.com 是 Play 商店 APK 的下载 CDN。Google 会按线路下发两类主机：
+  #     · 大陆 GGC（北京 2x3 / 上海 ni5 / 广州 j5o）— 只服务国内源 IP，走代理会 TLS 握手被丢弃
+  #     · 境外主机（如 SIN=新加坡）— 直连被墙（TLS 超时、下载 0 字节），必须走代理
+  #   上游 v2fly/domain-list-community 的 google-play 清单已用 @cn 标注好这个分界，
+  #   故「先按 @cn 直连、其余整族走代理」，两种解析状态下都能通。
+  #   注意：原先「整族强制直连」只在解析到大陆 GGC 时成立；
+  #         GGC 不再服务该域名族后（2026-09-26 实测 rrN 主机已返回 Google 境外 IP），
+  #         该写法会让商店永远停在「等待中」。
+  - GEOSITE,google-play@cn,全球直连
+  - DOMAIN-SUFFIX,xn--ngstr-lra8j.com,谷歌服务
 
   # --- 自定义代理 ---
   - RULE-SET,custom_proxy,自定义代理
